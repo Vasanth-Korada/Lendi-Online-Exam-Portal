@@ -27,7 +27,6 @@ class Login extends Component {
     render() { 
         return (
             <div className="Login">
-                <h2>Login</h2>
                 <br/>
                 <Form className="form" onSubmit={this.loginCredentials}>
                     <Form.Group>

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import firebase from '../../firebase';
-import Toast from '../../utils/Toastify';
+import { browserHistory } from '@version/react-router-v3';
 
 class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			errorToast: false,
 			dbpassword: '',
 			username: '', //TypedId
 			password: '' //Typed Password
@@ -22,11 +21,10 @@ class Login extends Component {
 	passwordChange(e) {
 		this.setState({ password: e.target.value });
 	}
-	loginSubmit(e) {
+	loginSubmit = async (e) => {
 		e.preventDefault();
-		console.log(this.state.username, this.state.password);
-		const ref = firebase.firestore().collection('loginData').doc(this.state.username);
-		ref
+		const ref = await firebase.firestore().collection('loginData').doc(this.state.username);
+		await ref
 			.get()
 			.then((doc) => {
 				const data = doc.data();
@@ -34,14 +32,17 @@ class Login extends Component {
 			})
 			.catch((err) => {
 				console.log('Invalid Username');
-				Toast('Invalid Username', 'error', false, 'bottom-center', 5000, 0);
 			});
 		if (this.state.password === this.state.dbpassword) {
 			console.log('LOGIN SUCCESS');
+
+			browserHistory.push({ pathname: '/notfound', username: this.state.username });
 		} else {
 			console.log('LOGIN FAILED');
+			alert('Invalid Username or Password');
 		}
-	}
+	};
+
 	render() {
 		return (
 			<div className="Login">

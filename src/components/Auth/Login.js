@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Button, Spinner } from 'react-bootstrap';
 import firebase from '../../firebase';
-import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
 	constructor(props) {
@@ -39,16 +38,16 @@ class Login extends Component {
 			});
 		if (this.state.password === this.state.dbpassword) {
 			console.log('LOGIN SUCCESS');
-
-			this.props.history.push({ pathname: '/dashboard', username: this.state.username });
 		} else {
 			console.log('LOGIN FAILED');
 			alert('Invalid Username or Password');
 		}
+	};
+	componentWillUnmount() {
 		this.setState({
 			loading: false
 		});
-	};
+	}
 
 	render() {
 		if (this.state.loading) {
@@ -105,4 +104,4 @@ class Login extends Component {
 	}
 }
 
-export default withRouter(Login);
+export default Login;

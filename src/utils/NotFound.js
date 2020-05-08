@@ -1,11 +1,15 @@
 import React from 'react';
 
-const NotFound = (props) => {
-	return (
-		<div>
-			<h1>{props.location.username}</h1>
-		</div>
-	);
-};
+class NotFound extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {};
+	}
+
+	render() {
+		return <h1>Page Not Found</h1>;
+	}
+}
 
 export default NotFound;

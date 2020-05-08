@@ -39,8 +39,8 @@ class Login extends Component {
 			});
 		if (this.state.password === this.state.dbpassword) {
 			console.log('LOGIN SUCCESS');
-			const { history } = this.props;
-			history.push({patname: "/notfound", username : this.state.username});
+
+			this.props.history.push({ pathname: '/dashboard', username: this.state.username });
 		} else {
 			console.log('LOGIN FAILED');
 			alert('Invalid Username or Password');
@@ -84,11 +84,10 @@ class Login extends Component {
 					</Form.Group>
 					<Form.Group>
 						<Button
-							style={{  marginLeft: '24%', width:'50%' }}
+							style={{ marginLeft: '24%', width: '50%' }}
 							type="submit"
 							variant="outline-success"
 							size="lg"
-							
 						>
 							LOGIN
 						</Button>

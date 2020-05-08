@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Form, Button, Spinner } from 'react-bootstrap';
 import firebase from '../../firebase';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			toDashboard: false,
 			loading: false,
 			dbpassword: '',
 			username: '', //TypedId
@@ -31,7 +33,7 @@ class Login extends Component {
 			.get()
 			.then((doc) => {
 				const data = doc.data();
-				this.setState({ dbpassword: data.password });
+				this.setState({ dbpassword: data.password, toDashboard: true });
 			})
 			.catch((err) => {
 				console.log('Invalid Username');
@@ -50,6 +52,18 @@ class Login extends Component {
 	}
 
 	render() {
+		if (this.state.toDashboard) {
+			return (
+				<Redirect
+					to={{
+						pathname: '/dashboard',
+						state: {
+							username: this.state.username
+						}
+					}}
+				/>
+			);
+		}
 		if (this.state.loading) {
 			return (
 				<div style={{ textAlign: 'center' }}>

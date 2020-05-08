@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import firebase from '../../firebase';
-import { browserHistory } from '@version/react-router-v3';
+import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			loading: false,
 			dbpassword: '',
 			username: '', //TypedId
 			password: '' //Typed Password
@@ -22,6 +23,9 @@ class Login extends Component {
 		this.setState({ password: e.target.value });
 	}
 	loginSubmit = async (e) => {
+		this.setState({
+			loading: true
+		});
 		e.preventDefault();
 		const ref = await firebase.firestore().collection('loginData').doc(this.state.username);
 		await ref
@@ -35,15 +39,27 @@ class Login extends Component {
 			});
 		if (this.state.password === this.state.dbpassword) {
 			console.log('LOGIN SUCCESS');
-
-			browserHistory.push({ pathname: '/notfound', username: this.state.username });
+			const { history } = this.props;
+			history.push({patname: "/notfound", username : this.state.username});
 		} else {
 			console.log('LOGIN FAILED');
 			alert('Invalid Username or Password');
 		}
+		this.setState({
+			loading: false
+		});
 	};
 
 	render() {
+		if (this.state.loading) {
+			return (
+				<div style={{ textAlign: 'center' }}>
+					<Spinner animation="grow" role="status" variant="success">
+						<span className="sr-only">Loading...</span>
+					</Spinner>
+				</div>
+			);
+		}
 		return (
 			<div className="Login">
 				<br />
@@ -67,7 +83,15 @@ class Login extends Component {
 						/>
 					</Form.Group>
 					<Form.Group>
-						<Button type="submit">LOGIN</Button>
+						<Button
+							style={{  marginLeft: '24%', width:'50%' }}
+							type="submit"
+							variant="outline-success"
+							size="lg"
+							
+						>
+							LOGIN
+						</Button>
 					</Form.Group>
 				</Form>
 				<br />
@@ -76,4 +100,4 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+export default withRouter(Login);

@@ -71,7 +71,9 @@ class Login extends Component {
 							placeholder="EG: 17KD1A0572"
 							value={this.state.username}
 							onChange={this.usernameChange}
+							minLength="10"
 							maxLength="10"
+							required
 						/>
 					</Form.Group>
 					<Form.Group>
@@ -81,7 +83,9 @@ class Login extends Component {
 							placeholder="4 Digit PIN"
 							value={this.state.password}
 							onChange={this.passwordChange}
+							minLength="4"
 							maxLength="4"
+							required
 						/>
 					</Form.Group>
 					<Form.Group>

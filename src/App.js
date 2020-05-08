@@ -16,7 +16,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
-			<Navbar expand="lg" variant="dark" bg="dark">
+			<Navbar expand="lg" variant="dark" bg="success">
 				<Container>
 					<Navbar.Brand href="#" className="navbar-logo">
 						Lendi Online Exam Portal

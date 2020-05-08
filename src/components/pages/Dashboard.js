@@ -1,24 +1,36 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Navbar, Container, Button } from 'react-bootstrap';
+import firebase from '../../firebase.js';
 class Dashboard extends React.Component {
 	username = '';
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			username: ''
+			username: '',
+			tests: {}
 		};
 	}
 
-	componentDidMount() {
+	componentDidMount = async () => {
 		this.setState({
 			username: this.props.location.username
 		});
-	}
+
+		await firebase.firestore().collection('tests').get().then((snapshot) => {
+			snapshot.docs.forEach((doc) => {
+				const data = doc.data();
+				console.log(data.questions);
+				this.setState({
+					tests: data
+				});
+			});
+		});
+		console.log(this.state.tests);
+	};
 
 	render() {
-		// if (this.state.username === undefined) {
 		// 	this.props.history.push('/sessionexpired');
 		// }
 		return (

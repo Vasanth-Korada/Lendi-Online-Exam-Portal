@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Button, Spinner } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import firebase from '../../firebase';
 import { Redirect } from 'react-router-dom';
+import Loader from '../../utils/Loader';
 
 class Login extends Component {
 	constructor(props) {
@@ -33,13 +34,14 @@ class Login extends Component {
 			.get()
 			.then((doc) => {
 				const data = doc.data();
-				this.setState({ dbpassword: data.password, toDashboard: true });
+				this.setState({ dbpassword: data.password });
 			})
 			.catch((err) => {
 				console.log('Invalid Username');
 			});
 		if (this.state.password === this.state.dbpassword) {
 			console.log('LOGIN SUCCESS');
+			this.setState({ toDashboard: true });
 		} else {
 			console.log('LOGIN FAILED');
 			alert('Invalid Username or Password');
@@ -65,13 +67,7 @@ class Login extends Component {
 			);
 		}
 		if (this.state.loading) {
-			return (
-				<div style={{ textAlign: 'center' }}>
-					<Spinner animation="grow" role="status" variant="success">
-						<span className="sr-only">Loading...</span>
-					</Spinner>
-				</div>
-			);
+			return <Loader />;
 		}
 		return (
 			<div className="Login">

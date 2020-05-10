@@ -5,15 +5,7 @@ import { Navbar, Card, Container } from 'react-bootstrap';
 
 
 class App extends React.Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			
-		}
-	}
-
-	render() {
+		render() {
 		return (
 			<div className="App">
 			<Navbar expand="lg" variant="dark" bg="success">

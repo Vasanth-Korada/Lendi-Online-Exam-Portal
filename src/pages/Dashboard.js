@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Navbar, Container, Button, Card } from 'react-bootstrap';
 import firebase from '../firebase.js';
 import { Redirect } from 'react-router-dom';
-import Loader from '../utils/Loader';
 
 function Dashboard(props) {
 	const [ toExam, setToExam ] = useState(false);
@@ -36,7 +35,7 @@ function Dashboard(props) {
 									userAttempted = userdata.isAttempted;
 								});
 							}
-							console.log(data);
+							console.log('DB Exam Objects:', data);
 							if (data.isActive) {
 								setTests((tests) => [ ...tests, data ]);
 							} else {
@@ -58,7 +57,6 @@ function Dashboard(props) {
 	const handleChange = async (obj) => {
 		setExamStarted(true);
 		setLoading(true);
-
 		console.log(obj);
 		console.log(username);
 		var ref = await firebase.firestore().collection('loginData').doc(username).collection('tests').doc(obj.exam_id);
@@ -71,9 +69,7 @@ function Dashboard(props) {
 		setCurrentExam(obj);
 		setToExam(true);
 	};
-	if (loading) {
-		return <Loader />;
-	}
+
 	if (toHome) {
 		return <Redirect to="/" />;
 	}
@@ -83,7 +79,8 @@ function Dashboard(props) {
 				to={{
 					pathname: '/examPage',
 					state: {
-						currentExam: currentExam
+						currentExam: currentExam,
+						username: username
 					}
 				}}
 			/>
@@ -130,6 +127,7 @@ function Dashboard(props) {
 					</div>
 				);
 			})}
+			{/* 
 			<div>
 				<h2 style={{ color: 'white', float: 'left', marginTop: '2%', marginLeft: '2%' }}> Archived Tests </h2>
 			</div>
@@ -148,6 +146,7 @@ function Dashboard(props) {
 					<br />
 				</div>
 			))}
+				*/}
 		</div>
 	);
 }

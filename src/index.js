@@ -7,14 +7,27 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SessionExpired from './utils/SessionExpired.js';
 import Dashboard from './pages/Dashboard';
 import ExamPage from './components/Exam/ExamPage';
+import Result from './components/Exam/Result';
+import AdminLogin from './components/Admin/AdminLogin';
+import Admin from './components/Admin/Admin';
+import Questions from './components/Admin/Question';
+import QuestionXLS from './components/Admin/QuestionXLS';
 ReactDOM.render(
 	<Router>
 		<Switch>
 			<Route exact path="/" component={App} />
 			<Route exact path="/sessionexpired" component={SessionExpired} />
-			<Route exact path="/dashboard" render={(props) => <Dashboard {...props}/>}/>
-			<Route exact path="/examPage" render={(props) => <ExamPage {...props}/>}/>
-			<Route exact path="*" component={SessionExpired}/>
+			<Route exact path="/dashboard" render={(props) => <Dashboard {...props} />} />
+			<Route exact path="/examPage" render={(props) => <ExamPage {...props} />} />
+			<Route exact path="/resultPage" render={(props) => <Result {...props} />} />
+			<Route exact path="/" component={App} />
+			<Route exact path="/adminLogin" component={AdminLogin} />
+
+			<Route exact path="/admin" component={Admin} />
+			<Route exact path="/question" component={Questions} />
+			<Route exact path="/csv-upload" component={QuestionXLS} />
+
+			<Route exact path="*" component={SessionExpired} />
 		</Switch>
 	</Router>,
 	document.getElementById('root')

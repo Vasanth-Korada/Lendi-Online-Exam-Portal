@@ -1,12 +1,11 @@
-import React from "react";
+import React from 'react';
 
-const Result = ({score, playAgain}) => (
-  <div className="score-board">
-    <div className="score">You scored {score} / 5 correct answers!</div>
-    <button className="playBtn" onClick={playAgain}>
-      Play again!
-    </button>
-  </div>
+const Result = (props) => (
+	<div className="score-board">
+		<div style={{color:"white"}} className="score">
+			You scored {props.location.state.score} / {props.location.state.exam_total_questions} correct answers!
+		</div>
+	</div>
 );
 
 export default Result;

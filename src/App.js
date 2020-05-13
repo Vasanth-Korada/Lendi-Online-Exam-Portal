@@ -1,30 +1,36 @@
 import React from 'react';
 import './App.css';
 import Login from './components/Auth/Login';
-import { Navbar, Card, Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-
+import { Card, Container, Row, Col } from 'react-bootstrap';
+import NavBar from "../src/components/NavBar"
 class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
-				<Navbar expand="lg" variant="dark" bg="success">
+				<NavBar title="Lendi Online Exam Portal" buttonType="adminLogin"/>
+				<div>
 					<Container>
-						<Navbar.Brand href="#" className="navbar-logo">
-							Lendi Online Exam Portal
-						</Navbar.Brand>
-						<Link to="/adminLogin">
-							<Button style={{ color: 'white' }}>Admin Login</Button>
-						</Link>
+						<Row className="login-row">
+							<Col>
+								<Card className="login-card">
+									<Card.Header as="h5">LOGIN HERE</Card.Header>
+									<Card.Header>
+										<Login />
+									</Card.Header>
+								</Card>
+							</Col>
+							<Col>
+								<div>
+									<img
+									className="login-image-signin"
+										style={{ width: '44rem', height: '28rem', marginTop: '1%' }}
+										src={require('../src/assets/mockup_1.png')}
+										alt=""
+									/>
+								</div>
+							</Col>
+						</Row>
 					</Container>
-				</Navbar>
-				<div className="login">
-					<Card>
-						<Card.Header as="h5">LOGIN HERE</Card.Header>
-						<Card.Header>
-							<Login />
-						</Card.Header>
-					</Card>
 				</div>
 			</div>
 		);

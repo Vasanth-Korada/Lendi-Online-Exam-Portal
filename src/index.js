@@ -22,6 +22,7 @@ ReactDOM.render(
 			<Route exact path="/resultPage" render={(props) => <Result {...props} />} />
 			<Route exact path="/" component={App} />
 			<Route exact path="/adminLogin" component={AdminLogin} />
+			<Route exact path="/logout" component={App} />
 
 			<Route exact path="/admin" component={Admin} />
 			<Route exact path="/question" component={Questions} />

@@ -1,5 +1,17 @@
-.login {
-    margin-top: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
+.login-card {
+    background: linear-gradient(90deg, #E6E6FA 0% 100%);
+    color: black;
+    margin-top: 14%;
+    width: 120%;
+    /* margin-left: 5%; */
+    /* margin-right: 25%; */
+}
+
+.login-row {
+    margin-top: 2%;
+}
+
+.login-image-signin {
+    margin-right: -125%;
+    margin-left: 30%;
 }

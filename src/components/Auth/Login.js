@@ -3,7 +3,9 @@ import { Form, Button } from 'react-bootstrap';
 import firebase from '../../firebase';
 import { Redirect } from 'react-router-dom';
 import Loader from '../../utils/Loader';
-
+import './Login.css';
+import HashLoader from 'react-spinners/HashLoader';
+import { UserContext } from '../../context/userContext';
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -67,49 +69,55 @@ class Login extends Component {
 			);
 		}
 		if (this.state.loading) {
-			return <Loader />;
+			return (
+				<div style={{ marginLeft: '40%' }}>
+					<HashLoader size={50} color="#732BCA" />
+				</div>
+			);
 		}
 		return (
-			<div className="Login">
-				<br />
-				<Form className="form" onSubmit={this.loginSubmit}>
-					<Form.Group>
-						<Form.Label>Registration No: </Form.Label>
-						<Form.Control
-							type="text"
-							placeholder="EG: 17KD1A0572"
-							value={this.state.username}
-							onChange={this.usernameChange}
-							minLength="10"
-							maxLength="10"
-							required
-						/>
-					</Form.Group>
-					<Form.Group>
-						<Form.Label>Password: </Form.Label>
-						<Form.Control
-							type="password"
-							placeholder="4 Digit PIN"
-							value={this.state.password}
-							onChange={this.passwordChange}
-							minLength="4"
-							maxLength="4"
-							required
-						/>
-					</Form.Group>
-					<Form.Group>
-						<Button
-							style={{ marginLeft: '24%', width: '50%' }}
-							type="submit"
-							variant="outline-success"
-							size="lg"
-						>
-							LOGIN
-						</Button>
-					</Form.Group>
-				</Form>
-				<br />
-			</div>
+			<UserContext.Provider value={{ state: this.state }}>
+				<div className="Login">
+					<br />
+					<Form className="form" onSubmit={this.loginSubmit}>
+						<Form.Group>
+							<Form.Label>Registration No: </Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="EG: 17KD1A0572"
+								value={this.state.username}
+								onChange={this.usernameChange}
+								minLength="10"
+								maxLength="10"
+								required
+							/>
+						</Form.Group>
+						<Form.Group>
+							<Form.Label>Password: </Form.Label>
+							<Form.Control
+								type="password"
+								placeholder="4 Digit PIN"
+								value={this.state.password}
+								onChange={this.passwordChange}
+								minLength="4"
+								maxLength="4"
+								required
+							/>
+						</Form.Group>
+						<Form.Group>
+							<Button
+								style={{ marginLeft: '24%', width: '50%', color: 'white', backgroundColor: '#732BCA' }}
+								type="submit"
+								variant="outline"
+								size="lg"
+							>
+								LOGIN
+							</Button>
+						</Form.Group>
+					</Form>
+					<br />
+				</div>
+			</UserContext.Provider>
 		);
 	}
 }

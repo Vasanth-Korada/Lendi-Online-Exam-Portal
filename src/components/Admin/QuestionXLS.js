@@ -34,9 +34,9 @@ const QuestionXLS = () => {
 				}
 			});
 			setTimeout(async () => {
-				var ref = await firebase.firestore().collection('tests').doc('109');
+				var ref = await firebase.firestore().collection('tests').doc('TC101');
 				ref
-					.set({
+					.update({
 						questions: questions_xls.current
 					})
 					.then(() => {

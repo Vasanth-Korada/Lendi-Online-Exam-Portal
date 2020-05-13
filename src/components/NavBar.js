@@ -20,13 +20,13 @@ class NavBar extends React.Component {
 						<h6>Unleash your skills and win prizes!</h6>
 					</Navbar.Brand>
 					{this.props.buttonType === 'adminLogin' ? (
-						<div>
-						</div>
-						// <Link to="/adminLogin">
-						// 	<Button variant="light" style={{ color: 'black' }}>
-						// 		Admin Login
-						// 	</Button>
-						// </Link>
+						// <div>
+						// </div>
+						<Link to="/adminLogin">
+							<Button variant="light" style={{ color: 'black' }}>
+								Admin Login
+							</Button>
+						</Link>
 					) : (
 						<Link to="/logout">
 							<Button variant="light" style={{ color: 'black' }}>

@@ -14,18 +14,26 @@ class NavBar extends React.Component {
 			<Navbar expand="lg" variant="dark" style={{ backgroundColor: '#732BCA', height: '5.5rem' }}>
 				<Container>
 					<Navbar.Brand className="navbar-logo">
-						<h4>{this.props.title}</h4>
+						<h2>
+							<b>{this.props.title}</b>
+						</h2>
+						<h6>Unleash your skills and win prizes!</h6>
 					</Navbar.Brand>
-					{this.props.buttonType === "adminLogin" ?<Link to="/adminLogin">
-						<Button variant="light" style={{ color: 'black' }}>
-							Admin Login
-						</Button>
-					</Link>:
-					<Link to="/logout">
-						<Button variant="light" style={{ color: 'black' }}>
-							LOGOUT
-						</Button>
-					</Link>}
+					{this.props.buttonType === 'adminLogin' ? (
+						<div>
+						</div>
+						// <Link to="/adminLogin">
+						// 	<Button variant="light" style={{ color: 'black' }}>
+						// 		Admin Login
+						// 	</Button>
+						// </Link>
+					) : (
+						<Link to="/logout">
+							<Button variant="light" style={{ color: 'black' }}>
+								LOGOUT
+							</Button>
+						</Link>
+					)}
 				</Container>
 			</Navbar>
 		);

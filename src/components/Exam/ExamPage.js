@@ -118,30 +118,30 @@ function ExamPage(props) {
 					padding: '12px'
 				}}
 			>
-			<div className="exam-timer-box">
-				<h3>
-					Ends in:
-					<b>
-						<Timer
-							initialTime={1000 * 60 * 1}
-							direction="backward"
-							checkpoints={[
-								{
-									time: 0,
-									callback: () => examOver()
-								}
-							]}
-						>
-							{() => (
-								<React.Fragment>
-									<Timer.Hours /> hours:
-									<Timer.Minutes /> minutes:
-									<Timer.Seconds /> seconds
-								</React.Fragment>
-							)}
-						</Timer>
-					</b>
-				</h3>
+				<div className="exam-timer-box">
+					<h3>
+						Ends in:
+						<b>
+							<Timer
+								initialTime={1000 * 60 * 5}
+								direction="backward"
+								checkpoints={[
+									{
+										time: 0,
+										callback: () => examOver()
+									}
+								]}
+							>
+								{() => (
+									<React.Fragment>
+										{/*<Timer.Hours /> hours:*/}
+										<Timer.Minutes /> minutes:
+										<Timer.Seconds /> seconds
+									</React.Fragment>
+								)}
+							</Timer>
+						</b>
+					</h3>
 				</div>
 			</div>
 

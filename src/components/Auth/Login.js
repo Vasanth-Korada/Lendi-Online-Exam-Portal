@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import firebase from '../../firebase';
 import { Redirect } from 'react-router-dom';
-import Loader from '../../utils/Loader';
 import './Login.css';
 import HashLoader from 'react-spinners/HashLoader';
 import { UserContext } from '../../context/userContext';
@@ -81,7 +80,7 @@ class Login extends Component {
 					<br />
 					<Form className="form" onSubmit={this.loginSubmit}>
 						<Form.Group>
-							<Form.Label>Registration No: </Form.Label>
+							<Form.Label>USER ID: </Form.Label>
 							<Form.Control
 								type="text"
 								placeholder="EG: 17KD1A0572"

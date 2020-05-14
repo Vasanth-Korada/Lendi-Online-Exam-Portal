@@ -11,7 +11,7 @@ class App extends React.Component {
 				<div>
 					<Container>
 						<Row className="login-row">
-							<Col>
+							<Col xl={5}>
 								<Card className="login-card">
 									<Card.Header as="h5">LOGIN HERE</Card.Header>
 									<Card.Header>
@@ -19,10 +19,10 @@ class App extends React.Component {
 									</Card.Header>
 								</Card>
 							</Col>
-							<Col>
-								<div>
+							<Col xl={5}>
+								<div className="login-image-signin">
 									<img
-										className="login-image-signin"
+										
 										style={{ width: '44rem', height: '28rem', marginTop: '1%' }}
 										src={require('../src/assets/mockup_1.png')}
 										alt=""

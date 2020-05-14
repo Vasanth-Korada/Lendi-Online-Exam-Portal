@@ -1,6 +1,9 @@
 import React from 'react';
 import { Navbar, Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import {FiLogOut} from 'react-icons/fi'
+import {RiAdminLine} from 'react-icons/ri'
+
 
 class NavBar extends React.Component {
 	constructor(props) {
@@ -19,21 +22,12 @@ class NavBar extends React.Component {
 						</h2>
 						<h6>Unleash your skills and win prizes!</h6>
 					</Navbar.Brand>
-					{this.props.buttonType === 'adminLogin' ? (
-						// <div>
-						// </div>
-						<Link to="/adminLogin">
-							<Button variant="light" style={{ color: 'black' }}>
-								Admin Login
-							</Button>
-						</Link>
-					) : (
-						<Link to="/logout">
-							<Button variant="light" style={{ color: 'black' }}>
-								LOGOUT
-							</Button>
-						</Link>
-					)}
+					{this.props.buttonType === "adminLogin" ?<Link to="/adminLogin">
+						<RiAdminLine color="white" title="ADMIN" size={40}/>
+					</Link>:
+					<Link to="/logout">
+						<FiLogOut color="white" title="Logout" size={40}/>
+					</Link>}
 				</Container>
 			</Navbar>
 		);

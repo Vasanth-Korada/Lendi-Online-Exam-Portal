@@ -113,7 +113,7 @@ function ExamPage(props) {
 				style={{
 					float: 'right',
 					color: 'white',
-					backgroundColor: '#732BCA',
+					backgroundColor: '#0A79DF',
 					borderRadius: '12px',
 					padding: '12px'
 				}}
@@ -177,7 +177,7 @@ function ExamPage(props) {
 				})}
 			</div>
 			<div style={{ marginLeft: '50%', padding: '20px' }}>
-				<PropagateLoader size={20} loading={loading} color="#732BCA" />
+				<PropagateLoader size={20} loading={loading} color="#0A79DF" />
 			</div>
 			<div style={{ float: 'right', padding: '20px' }} className="mb-2">
 				<Button
@@ -185,7 +185,7 @@ function ExamPage(props) {
 						float: 'right',
 						width: '100%',
 						color: 'white',
-						backgroundColor: '#732BCA'
+						backgroundColor: '#0A79DF'
 					}}
 					type="submit"
 					variant="outline"
@@ -225,7 +225,7 @@ function ExamPage(props) {
 				style={{
 					width: '60%',
 					color: 'white',
-					backgroundColor: '#732BCA'
+					backgroundColor: '#0A79DF'
 				}}
 				type="submit"
 				variant="outline"

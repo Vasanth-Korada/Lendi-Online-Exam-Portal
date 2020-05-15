@@ -35,7 +35,7 @@ const AdminLogin = () => {
 						<div>
 							<img
 								className="login-image"
-								style={{ width: '42rem', height: '28rem', marginTop: '1%' }}
+								style={{ width: '35rem', height: '30rem', marginTop: '10%' }}
 								src={require('../../assets/clip-sign-in.png')}
 								alt=""
 							/>
@@ -75,7 +75,7 @@ const AdminLogin = () => {
 													marginLeft: '24%',
 													width: '50%',
 													color: 'white',
-													backgroundColor: '#732BCA'
+													backgroundColor: '#0A79DF'
 												}}
 												type="submit"
 												variant="outline"

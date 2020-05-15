@@ -4,7 +4,7 @@
 }
 
 .custom {
-    background-color: #b19cd9;
+    background-color: rgb(106, 156, 202);
     position: relative;
     width: 1024px;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -21,7 +21,7 @@
 
 .exam-title-box {
     position: relative;
-    background-color: #732BCA;
+    background-color: #0A79DF;
     color: rgb(255, 255, 255);
     padding: 20px;
     font-size: 1.8em;
@@ -71,7 +71,7 @@
     color: white;
     margin-left: 25%;
     margin-right: 25%;
-    background-color: #732BCA;
+    background-color: #0A79DF;
     padding: 10px;
     border-radius: 50px;
     position: relative;
@@ -81,6 +81,7 @@
 }
 
 .result-image {
+    margin-top: -6%;
     width: 175px;
     height: 175px;
     position: relative;
@@ -100,7 +101,7 @@
     margin-right: 10px;
     right: 0;
     text-align: center;
-    background-color: #732BCA;
+    background-color: #0A79DF;
     color: white;
     border-radius: 30px;
     width: 32%;

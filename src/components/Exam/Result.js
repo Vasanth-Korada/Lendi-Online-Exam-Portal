@@ -13,7 +13,7 @@ const Result = (props) => (
 
 		<div className="result-image">
 			<img
-				style={{ width: '45rem', height: '30rem', marginTop: '1%' }}
+				style={{ width: '35rem', height: '40rem' }}
 				src={require('../../assets/clip-1.png')}
 				alt=""
 			/>

@@ -13,7 +13,7 @@ class NavBar extends React.Component {
 
 	render() {
 		return (
-			<Navbar expand="lg" variant="dark" style={{ backgroundColor: '#732BCA', height: '5.5rem' }}>
+			<Navbar expand="lg" variant="dark" style={{ backgroundColor: '#0A79DF', height: '5.5rem' }}>
 				<Container>
 					<Navbar.Brand className="navbar-logo">
 						<h2>

@@ -71,7 +71,7 @@ function Dashboard(props) {
 		await ref.set({
 			isAttempted: true,
 			isSubmitted: false,
-			marks: 0
+			marks: null
 		});
 		setCurrentExam(obj);
 		setToExam(true);
@@ -125,7 +125,7 @@ function Dashboard(props) {
 														float: 'right',
 														width: '15%',
 														color: 'white',
-														backgroundColor: '#732BCA'
+														backgroundColor: '#0A79DF'
 													}}
 													type="submit"
 													variant="outline"
@@ -144,7 +144,7 @@ function Dashboard(props) {
 							);
 						})}
 						<div style={{ marginLeft: '50%' }}>
-							{loading ? <RingLoader size={100} color={'#732BCA'} loading={loading} /> : <div />}
+							{loading ? <RingLoader size={100} color={'#0A79DF'} loading={loading} /> : <div />}
 						</div>
 						{/* <div>
 							<h2 style={{ color: 'black', float: 'left', marginTop: '2%', marginLeft: '2%' }}>
@@ -174,7 +174,13 @@ function Dashboard(props) {
 											<Card className="accordion-content">
 												{archTests.map((obj, idx) => (
 													<div key={idx}>
-														<Card style={{ marginLeft: '5%', marginRight: '5%',marginTop: '5%'  }}>
+														<Card
+															style={{
+																marginLeft: '5%',
+																marginRight: '5%',
+																marginTop: '5%'
+															}}
+														>
 															<Card.Header as="h5">TEST ID: {obj.exam_id}</Card.Header>
 															<Card.Body>
 																<Card.Title>{obj.exam_name}</Card.Title>
@@ -194,12 +200,11 @@ function Dashboard(props) {
 								</Accordion>
 							</Col>
 							<Col xl={6}>
-								<div style={{ marginTop: '100px' }} />
 
 								<div style={{ marginLeft: '-25%' }}>
 									<img
 										className="login-image-signin"
-										style={{ width: '35rem', height: '25rem', marginTop: '1%', opacity: '0.8' }}
+										style={{ width: '35rem', height: '35rem', marginTop: '1%', opacity: '1.0' }}
 										src={require('../assets/clip-programming.png')}
 										alt=""
 									/>

@@ -70,7 +70,7 @@ class Login extends Component {
 		if (this.state.loading) {
 			return (
 				<div style={{ marginLeft: '40%' }}>
-					<HashLoader size={50} color="#732BCA" />
+					<HashLoader size={50} color="#0A79DF" />
 				</div>
 			);
 		}
@@ -105,7 +105,7 @@ class Login extends Component {
 						</Form.Group>
 						<Form.Group>
 							<Button
-								style={{ marginLeft: '24%', width: '50%', color: 'white', backgroundColor: '#732BCA' }}
+								style={{ marginLeft: '24%', width: '50%', color: 'white', backgroundColor: '#0A79DF' }}
 								type="submit"
 								variant="outline"
 								size="lg"

@@ -7,7 +7,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
-				<NavBar title="Talent Connect ❤" buttonType="adminLogin" />
+				<NavBar title="Lendi Online Exam Portal" buttonType="adminLogin" />
 				<div className="col">
 					<Container>
 						<Row className="login-row">
@@ -23,7 +23,7 @@ class App extends React.Component {
 								<div className="login-image-signin">
 									<img
 										
-										style={{ width: '44rem', height: '28rem', marginTop: '1%' }}
+										style={{ width: '42rem', height: '40rem'}}
 										src={require('../src/assets/mockup_1.png')}
 										alt=""
 									/>

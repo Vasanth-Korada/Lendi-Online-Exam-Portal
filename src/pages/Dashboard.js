@@ -22,33 +22,52 @@ function Dashboard(props) {
 		if (examStarted === false) {
 			setTimeout(async () => {
 				setUsername(props.location.state.username);
-				var USERNAME = props.location.state.username;
-				// var ref = await firebase.firestore().collection('loginData').doc(USERNAME);
-				// ref.collection("tests").doc(currentExam.exam_id).get().then((doc)=>{
-				// 	const data = doc.data();
-				// 	console.log(doc.isAttempted);
-				// })
 
 				await firebase.firestore().collection('tests').get().then((snapshot) => {
 					snapshot.docs.forEach(async (doc) => {
 						const data = doc.data();
-						if (testid !== 0) {
-							var ref = await firebase
-								.firestore()
-								.collection('loginData')
-								.doc(username)
-								.collection('tests')
-								.doc(testid);
-							ref.get().then((doc) => {
-								const userdata = doc.data();
-								console.log(userdata.isAttempted);
-							});
-						}
-						console.log('DB Exam Objects:', data);
 						if (data.isActive) {
+							var ref1 = await firebase
+								.firestore()
+								.collection('tests')
+								.doc(data.exam_id)
+								.collection('participants')
+								.doc(props.location.state.username);
+							ref1
+								.get()
+								.then((doc) => {
+									const data = doc.data();
+									setisAttempted(data.isAttempted);
+									console.log('User Attempted Active Test', data.isAttempted);
+								})
+								.catch((e) => {
+									console.log(e);
+								});
+							setisAttempted(data.isAttempted);
+							console.log(data);
 							setTests((tests) => [ ...tests, data ]);
+							setTestID(data.exam_id);
 						} else {
-							setarchTests((archTests) => [ ...archTests, data ]);
+							var scored = 0;
+							var ref2 = await firebase
+								.firestore()
+								.collection('tests')
+								.doc(data.exam_id)
+								.collection('participants')
+								.doc(props.location.state.username);
+							ref2
+								.get()
+								.then((doc) => {
+									const data1 = doc.data();
+									console.log(data1.marks);
+									const scored = data1.marks;
+									data['scored'] = scored;
+									console.log(data);
+									setarchTests((archTests) => [ ...archTests, data ]);
+								})
+								.catch((e) => {
+									console.log(e);
+								});
 						}
 					});
 				});
@@ -66,7 +85,12 @@ function Dashboard(props) {
 		setExamStarted(true);
 		console.log(obj);
 		console.log(username);
-		var ref = await firebase.firestore().collection('loginData').doc(username).collection('tests').doc(obj.exam_id);
+		var ref = await firebase
+			.firestore()
+			.collection('tests')
+			.doc(obj.exam_id)
+			.collection('participants')
+			.doc(username);
 		setTestID(obj.exam_id);
 		await ref.set({
 			isAttempted: true,
@@ -101,11 +125,9 @@ function Dashboard(props) {
 						<NavBar title={`Welcome ${username}`} />
 						<div>
 							<h2 style={{ float: 'left', marginTop: '2%', marginLeft: '2%' }}>
-								{' '}
-								<b>Ongoing Tests</b>{' '}
+								<b>Ongoing Tests</b>
 							</h2>
 						</div>
-
 						<div style={{ marginTop: '100px' }} />
 						{tests.map((obj, idx) => {
 							return (
@@ -118,7 +140,21 @@ function Dashboard(props) {
 											<Card.Text>Duration: {obj.exam_duration}</Card.Text>
 											<Card.Text>Marks: {obj.exam_marks}</Card.Text>
 											{isAttempted ? (
-												<div>Already Attempted</div>
+												<Button
+													style={{
+														fontSize: '14px',
+														float: 'right',
+														width: '15%',
+														color: 'white',
+														backgroundColor: 'grey'
+													}}
+													type="submit"
+													variant="outline"
+													size="lg"
+													disabled
+												>
+													ALREADY ATTEMPTED
+												</Button>
 											) : (
 												<Button
 													style={{
@@ -146,14 +182,8 @@ function Dashboard(props) {
 						<div style={{ marginLeft: '50%' }}>
 							{loading ? <RingLoader size={100} color={'#0A79DF'} loading={loading} /> : <div />}
 						</div>
-						{/* <div>
-							<h2 style={{ color: 'black', float: 'left', marginTop: '2%', marginLeft: '2%' }}>
-								{' '}
-								Archived Tests{' '}
-							</h2>
-						</div>*/}
 						<Row>
-							<Col xl={6}>
+							<Col xs={12} xl={6}>
 								<Accordion
 									defaultActiveKey="0"
 									style={{
@@ -188,7 +218,14 @@ function Dashboard(props) {
 																	Total Questions: {obj.exam_total_questions}
 																</Card.Text>
 																<Card.Text>Duration: {obj.exam_duration}</Card.Text>
-																<Card.Text>Marks: {obj.exam_marks}</Card.Text>
+																<Card.Text>Total Marks: {obj.exam_marks}</Card.Text>
+																<Card.Text>
+																	{obj.scored === null ? (
+																		<b>Marks Scored: Not Attempted</b>
+																	) : (
+																		<b>Marks Scored: {obj.scored}</b>
+																	)}
+																</Card.Text>
 															</Card.Body>
 														</Card>
 														<br />
@@ -199,9 +236,8 @@ function Dashboard(props) {
 									</Card>
 								</Accordion>
 							</Col>
-							<Col xl={6}>
-
-								<div style={{ marginLeft: '-25%' }}>
+							<Col xs={12} xl={6}>
+								<div style={{ marginLeft: '-15%' }}>
 									<img
 										className="login-image-signin"
 										style={{ width: '35rem', height: '35rem', marginTop: '1%', opacity: '1.0' }}

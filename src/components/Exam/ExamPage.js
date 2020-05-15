@@ -72,10 +72,10 @@ function ExamPage(props) {
 			console.log(score.current);
 			var ref = await firebase
 				.firestore()
-				.collection('loginData')
-				.doc(props.location.state.username)
 				.collection('tests')
-				.doc(currentExam.exam_id);
+				.doc(currentExam.exam_id)
+				.collection('participants')
+				.doc(props.location.state.username);
 			await ref
 				.set({
 					isSubmitted: true,

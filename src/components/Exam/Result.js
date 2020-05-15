@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Result = (props) => (
-	<div className="score-board">
+	<div >
 		<div style={{ marginTop: '-10%' }} className="score">
 			<h1>Whola!</h1>
 			<b>Your Result!</b>

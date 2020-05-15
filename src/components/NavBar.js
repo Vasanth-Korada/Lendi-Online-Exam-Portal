@@ -17,8 +17,7 @@ class NavBar extends React.Component {
 				<Container>
 					<Navbar.Brand className="navbar-logo">
 						<h2>
-							{/*<b>{this.props.title}</b>*/}
-							<b>Online Exam Portal</b>
+							<b>{this.props.title}</b>
 						</h2>
 						{/* 
 						<h6>Unleash your skills and win prizes!</h6>*/}

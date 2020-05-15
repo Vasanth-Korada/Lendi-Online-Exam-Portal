@@ -1,0 +1,4 @@
+.accordion-content {
+    height: 400px;
+    overflow-y: scroll;
+}

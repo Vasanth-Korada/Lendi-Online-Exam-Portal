@@ -17,14 +17,21 @@ function Dashboard(props) {
 	const [ currentExam, setCurrentExam ] = useState({});
 	const [ examStarted, setExamStarted ] = useState(false);
 	const [ loading, setloading ] = useState(false);
+	const [ isAttempted, setisAttempted ] = useState(false);
 	useEffect(() => {
 		if (examStarted === false) {
 			setTimeout(async () => {
 				setUsername(props.location.state.username);
+				var USERNAME = props.location.state.username;
+				// var ref = await firebase.firestore().collection('loginData').doc(USERNAME);
+				// ref.collection("tests").doc(currentExam.exam_id).get().then((doc)=>{
+				// 	const data = doc.data();
+				// 	console.log(doc.isAttempted);
+				// })
+
 				await firebase.firestore().collection('tests').get().then((snapshot) => {
 					snapshot.docs.forEach(async (doc) => {
 						const data = doc.data();
-						var userAttempted = false;
 						if (testid !== 0) {
 							var ref = await firebase
 								.firestore()
@@ -35,7 +42,6 @@ function Dashboard(props) {
 							ref.get().then((doc) => {
 								const userdata = doc.data();
 								console.log(userdata.isAttempted);
-								userAttempted = userdata.isAttempted;
 							});
 						}
 						console.log('DB Exam Objects:', data);
@@ -91,6 +97,7 @@ function Dashboard(props) {
 		<UserContext.Consumer>
 			{(context) => {
 				// console.log(userContext);
+
 				return (
 					<div>
 						<NavBar title={`Welcome ${username}`} />
@@ -109,22 +116,26 @@ function Dashboard(props) {
 											<Card.Text>Total Question: {obj.exam_total_questions}</Card.Text>
 											<Card.Text>Duration: {obj.exam_duration}</Card.Text>
 											<Card.Text>Marks: {obj.exam_marks}</Card.Text>
-											<Button
-												style={{
-													float: 'right',
-													width: '15%',
-													color: 'white',
-													backgroundColor: '#732BCA'
-												}}
-												type="submit"
-												variant="outline"
-												size="lg"
-												onClick={() => {
-													handleChange(obj);
-												}}
-											>
-												START TEST
-											</Button>
+											{isAttempted ? (
+												<div>Already Attempted</div>
+											) : (
+												<Button
+													style={{
+														float: 'right',
+														width: '15%',
+														color: 'white',
+														backgroundColor: '#732BCA'
+													}}
+													type="submit"
+													variant="outline"
+													size="lg"
+													onClick={() => {
+														handleChange(obj);
+													}}
+												>
+													START TEST
+												</Button>
+											)}
 										</Card.Body>
 									</Card>
 									<br />

@@ -123,7 +123,8 @@ function ExamPage(props) {
 						Ends in:
 						<b>
 							<Timer
-								initialTime={1000 * 60 * 1}
+								initialTime={1000 * 60 * 5
+								}
 								direction="backward"
 								checkpoints={[
 									{

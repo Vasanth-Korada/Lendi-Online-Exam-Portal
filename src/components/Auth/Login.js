@@ -46,6 +46,9 @@ class Login extends Component {
 		} else {
 			console.log('LOGIN FAILED');
 			alert('Invalid Username or Password');
+			this.setState({
+				loading:false
+			})
 		}
 	};
 	componentWillUnmount() {
@@ -78,6 +81,7 @@ class Login extends Component {
 			<UserContext.Provider value={{ state: this.state }}>
 				<div className="Login">
 					<br />
+
 					<Form className="form" onSubmit={this.loginSubmit}>
 						<Form.Group>
 							<Form.Label>USER ID: </Form.Label>

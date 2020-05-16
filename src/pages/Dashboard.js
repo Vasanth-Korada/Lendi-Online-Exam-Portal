@@ -122,7 +122,8 @@ function Dashboard(props) {
 			{(context) => {
 				return (
 					<div>
-						<NavBar title={`Welcome ${username}`} />
+						<NavBar title={`Welcome ${username}`} resetPasswordbtn={true} username={username} />
+
 						<div>
 							<h2 style={{ float: 'left', marginTop: '2%', marginLeft: '2%' }}>
 								<b>Ongoing Tests</b>
@@ -197,7 +198,7 @@ function Dashboard(props) {
 									<Card>
 										<Accordion.Toggle as={Card.Header} eventKey="0">
 											<h5>
-												<b>Archived Tests</b>
+												<b>My Previous Activity</b>
 											</h5>
 										</Accordion.Toggle>
 										<Accordion.Collapse eventKey="0">

@@ -48,7 +48,7 @@ const AdminLogin = () => {
 								<div className="login">
 									<Form className="form" onSubmit={loginSubmit}>
 										<Form.Group>
-											<Form.Label>Registration No: </Form.Label>
+											<Form.Label>USER ID: </Form.Label>
 											<Form.Control
 												type="text"
 												placeholder="EG: LT12345"

@@ -9,9 +9,9 @@ import Dashboard from './pages/Dashboard';
 import ExamPage from './components/Exam/ExamPage';
 import Result from './components/Exam/Result';
 import AdminLogin from './components/Admin/AdminLogin';
-import Admin from './components/Admin/Admin';
 import Questions from './components/Admin/Question';
 import QuestionXLS from './components/Admin/QuestionXLS';
+import AdminDashboard from './components/Admin/AdminDashboard';
 ReactDOM.render(
 	<Router>
 		<Switch>
@@ -21,12 +21,12 @@ ReactDOM.render(
 			<Route exact path="/examPage" render={(props) => <ExamPage {...props} />} />
 			<Route exact path="/resultPage" render={(props) => <Result {...props} />} />
 			<Route exact path="/" component={App} />
-			<Route exact path="/adminLogin" component={AdminLogin} />
 			<Route exact path="/logout" component={App} />
 
-			<Route exact path="/admin" component={Admin} />
+			<Route exact path="/adminLogin" component={AdminLogin} />
 			<Route exact path="/question" component={Questions} />
 			<Route exact path="/csv-upload" component={QuestionXLS} />
+			<Route exact path="/adminDashboard" component={AdminDashboard}/>
 
 			<Route exact path="*" component={SessionExpired} />
 		</Switch>

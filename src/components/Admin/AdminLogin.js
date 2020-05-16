@@ -18,7 +18,7 @@ const AdminLogin = () => {
 		return (
 			<Redirect
 				to={{
-					pathname: '/admin',
+					pathname: '/adminDashboard',
 					state: {
 						name: username
 					}

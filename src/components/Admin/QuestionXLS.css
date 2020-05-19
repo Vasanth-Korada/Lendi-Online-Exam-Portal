@@ -7,8 +7,10 @@
     border-radius: 5%;
     border-color: cadetblue;
     background-color: #efefef;
+}
 
-
+.Table {
+    padding: 16px;
 }
 
 .Drop {
@@ -18,10 +20,9 @@
     align-items: center;
     height: 200px;
     box-shadow: none;
-    
 }
 
-Button{
+Button {
     margin-bottom: 2%;
     margin-left: 2%;
 }

@@ -215,11 +215,7 @@ function Dashboard(props) {
 															<Card.Header as="h5">TEST ID: {obj.exam_id}</Card.Header>
 															<Card.Body>
 																<Card.Title>{obj.exam_name}</Card.Title>
-																<Card.Text>
-																	Total Questions: {obj.exam_total_questions}
-																</Card.Text>
-																<Card.Text>Duration: {obj.exam_duration}</Card.Text>
-																<Card.Text>Total Marks: {obj.exam_marks}</Card.Text>
+																																<Card.Text>Total Marks: {obj.exam_marks}</Card.Text>
 																<Card.Text>
 																	{obj.scored === null ? (
 																		<b>Marks Scored: Not Attempted</b>

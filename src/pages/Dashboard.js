@@ -123,7 +123,7 @@ function Dashboard(props) {
 				return (
 					<div>
 						<NavBar title={`Welcome ${username}`} resetPasswordbtn={true} username={username} />
-
+                        
 						<div>
 							<h2 style={{ float: 'left', marginTop: '2%', marginLeft: '2%' }}>
 								<b>Ongoing Tests</b>
@@ -244,6 +244,7 @@ function Dashboard(props) {
 								</div>
 							</Col>
 						</Row>
+						
 					</div>
 				);
 			}}

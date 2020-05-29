@@ -8,7 +8,7 @@ class App extends React.Component {
 		return (
 			<div className="App">
 				<NavBar title="Lendi Online Exam Portal" buttonType="adminLogin" />
-				<div>
+				<div className='col'>
 					<Container>
 						<Row className="login-row">
 							<Col xl={5}>

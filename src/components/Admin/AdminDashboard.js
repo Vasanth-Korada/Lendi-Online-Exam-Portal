@@ -59,7 +59,7 @@ const AdminDashboard = () => {
 			const unixTime = new Date(values.exam_date + ',' + values.exam_time).getTime() / 1000;
 
 			var ref = await firebase.firestore().collection('tests').doc(values.exam_id);
-			await ref.set({
+			await ref.update({
 				isActive: false,
 				exam_duration: values.duration,
 				exam_time_unix: unixTime,

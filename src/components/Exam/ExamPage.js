@@ -10,6 +10,7 @@ import { useBeforeunload } from 'react-beforeunload';
 import { UserContext } from '../../context/userContext';
 import Timer from 'react-compound-timer';
 import Fullscreen from 'react-full-screen';
+import HashLoader from 'react-spinners/HashLoader';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 
 function ExamPage(props) {
@@ -29,6 +30,18 @@ function ExamPage(props) {
 
 	useEffect(
 		() => {
+			document.addEventListener('contextmenu', (event) => event.preventDefault());
+			var elem = document.documentElement;
+			if (elem.mozRequestFullScreen) {
+				/* Firefox */
+				elem.mozRequestFullScreen();
+			} else if (elem.webkitRequestFullscreen) {
+				/* Chrome, Safari and Opera */
+				elem.webkitRequestFullscreen();
+			} else if (elem.msRequestFullscreen) {
+				/* IE/Edge */
+				elem.msRequestFullscreen();
+			}
 			if (Object.keys(currentExam).length !== 0) {
 				setexamDurationMins(currentExam.exam_duration);
 			}
@@ -57,6 +70,7 @@ function ExamPage(props) {
 		setResponses(responses < currentExam.exam_total_questions ? responses + 1 : currentExam.exam_total_questions);
 	};
 	const handleSubmit = async () => {
+		setloading(true);
 		console.log('User Answers:', userAnswers.current);
 		Object.entries(userAnswers.current).forEach((entry) => {
 			const userEntry = entry;
@@ -96,6 +110,7 @@ function ExamPage(props) {
 		console.log('Exam Over');
 		setexamover(true);
 	};
+	
 	if (toResult) {
 		return (
 			<Redirect

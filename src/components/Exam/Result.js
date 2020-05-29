@@ -1,6 +1,18 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 
-const Result = (props) => (
+const Result = (props) => {
+	useEffect(() => {
+		var elem = document.documentElement;
+
+		if (document.mozCancelFullScreen) { /* Firefox */
+			document.mozCancelFullScreen();
+		} else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+			document.webkitExitFullscreen();
+		} else if (document.msExitFullscreen) { /* IE/Edge */
+			document.msExitFullscreen();
+		}
+	})
+	return(
 	<div >
 		<div style={{ marginTop: '-10%' }} className="score">
 			<h1>Whola!</h1>
@@ -23,5 +35,6 @@ const Result = (props) => (
 		</div>
 	</div>
 );
+}
 
 export default Result;

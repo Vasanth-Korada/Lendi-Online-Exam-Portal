@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import './Dashboard.css';
 import { UserContext } from '../context/userContext';
-import RingLoader from 'react-spinners/RingLoader';
+import PropagateLoader from 'react-spinners/PropagateLoader';
 function Dashboard(props) {
 	const [ toExam, setToExam ] = useState(false);
 	const userContext = useContext(UserContext);
@@ -123,128 +123,130 @@ function Dashboard(props) {
 				return (
 					<div>
 						<NavBar title={`Welcome ${username}`} resetPasswordbtn={true} username={username} />
-                        
-						<div>
-							<h2 style={{ float: 'left', marginTop: '2%', marginLeft: '2%' }}>
-								<b>Ongoing Tests</b>
-							</h2>
+						<div className="container-fluid">
+							<div>
+								<h2 style={{ float: 'left', marginTop: '-5%', marginLeft: '3%' }}>
+									<b>Ongoing Tests</b>
+								</h2>
+							</div>
+							<div style={{ marginTop: '100px' }} />
+							{tests.map((obj, idx) => {
+								return (
+									<div className="col" key={idx}>
+										<Card style={{ marginLeft: '4%', marginRight: '5%' }}>
+											<Card.Header as="h5">Test ID: {obj.exam_id}</Card.Header>
+											<Card.Body>
+												<Card.Title>{obj.exam_name}</Card.Title>
+												<Card.Text>Total Question: {obj.exam_total_questions}</Card.Text>
+												<Card.Text>Duration: {obj.exam_duration}</Card.Text>
+												<Card.Text>Marks: {obj.exam_marks}</Card.Text>
+												{isAttempted ? (
+													<Button
+														style={{
+															fontSize: '14px',
+															float: 'right',
+															width: '15%',
+															color: 'white',
+															backgroundColor: 'grey'
+														}}
+														type="submit"
+														variant="outline"
+														size="lg"
+														disabled
+													>
+														ALREADY ATTEMPTED
+													</Button>
+												) : (
+													<Button
+														style={{
+															float: 'right',
+															width: '15%',
+															color: 'white',
+															backgroundColor: '#0A79DF'
+														}}
+														type="submit"
+														variant="outline"
+														size="lg"
+														onClick={() => {
+															handleChange(obj);
+														}}
+													>
+														START TEST
+													</Button>
+												)}
+											</Card.Body>
+										</Card>
+										<br />
+									</div>
+								);
+							})}
+							<div style={{ marginLeft: '50%' }}>
+								{loading ? <PropagateLoader size={20} color={'#0A79DF'} loading={loading} /> : <div />}
+							</div>
+							<Row>
+								<Col xs={12} xl={6}>
+									<Accordion
+										defaultActiveKey="0"
+										style={{
+											color: 'black',
+											float: 'left',
+											marginTop: '2%',
+											marginLeft: '10%',
+											width: '65%'
+										}}
+									>
+										<Card>
+											<Accordion.Toggle as={Card.Header} eventKey="0">
+												<h5>
+													<b>My Previous Activity</b>
+												</h5>
+											</Accordion.Toggle>
+											<Accordion.Collapse eventKey="0">
+												<Card className="accordion-content">
+													{archTests.map((obj, idx) => (
+														<div key={idx}>
+															<Card
+																style={{
+																	marginLeft: '5%',
+																	marginRight: '5%',
+																	marginTop: '5%'
+																}}
+															>
+																<Card.Header as="h5">
+																	TEST ID: {obj.exam_id}
+																</Card.Header>
+																<Card.Body>
+																	<Card.Title>{obj.exam_name}</Card.Title>
+																	<Card.Text>Total Marks: {obj.exam_marks}</Card.Text>
+																	<Card.Text>
+																		{obj.scored === null ? (
+																			<b>Marks Scored: Not Attempted</b>
+																		) : (
+																			<b>Marks Scored: {obj.scored}</b>
+																		)}
+																	</Card.Text>
+																</Card.Body>
+															</Card>
+															<br />
+														</div>
+													))}
+												</Card>
+											</Accordion.Collapse>
+										</Card>
+									</Accordion>
+								</Col>
+								<Col xs={12} xl={6}>
+									<div style={{ marginLeft: '-15%' }}>
+										<img
+											className="login-image-signin"
+											style={{ width: '35rem', height: '35rem', marginTop: '1%', opacity: '1.0' }}
+											src={require('../assets/clip-programming.png')}
+											alt=""
+										/>
+									</div>
+								</Col>
+							</Row>
 						</div>
-						<div style={{ marginTop: '100px' }} />
-						{tests.map((obj, idx) => {
-							return (
-								<div key={idx}>
-									<Card style={{ marginLeft: '5%', marginRight: '5%' }}>
-										<Card.Header as="h5">Test ID: {obj.exam_id}</Card.Header>
-										<Card.Body>
-											<Card.Title>{obj.exam_name}</Card.Title>
-											<Card.Text>Total Question: {obj.exam_total_questions}</Card.Text>
-											<Card.Text>Duration: {obj.exam_duration}</Card.Text>
-											<Card.Text>Marks: {obj.exam_marks}</Card.Text>
-											{isAttempted ? (
-												<Button
-													style={{
-														fontSize: '14px',
-														float: 'right',
-														width: '15%',
-														color: 'white',
-														backgroundColor: 'grey'
-													}}
-													type="submit"
-													variant="outline"
-													size="lg"
-													disabled
-												>
-													ALREADY ATTEMPTED
-												</Button>
-											) : (
-												<Button
-													style={{
-														float: 'right',
-														width: '15%',
-														color: 'white',
-														backgroundColor: '#0A79DF'
-													}}
-													type="submit"
-													variant="outline"
-													size="lg"
-													onClick={() => {
-														handleChange(obj);
-													}}
-												>
-													START TEST
-												</Button>
-											)}
-										</Card.Body>
-									</Card>
-									<br />
-								</div>
-							);
-						})}
-						<div style={{ marginLeft: '50%' }}>
-							{loading ? <RingLoader size={100} color={'#0A79DF'} loading={loading} /> : <div />}
-						</div>
-						<Row>
-							<Col xs={12} xl={6}>
-								<Accordion
-									defaultActiveKey="0"
-									style={{
-										color: 'black',
-										float: 'left',
-										marginTop: '2%',
-										marginLeft: '10%',
-										width: '65%'
-									}}
-								>
-									<Card>
-										<Accordion.Toggle as={Card.Header} eventKey="0">
-											<h5>
-												<b>My Previous Activity</b>
-											</h5>
-										</Accordion.Toggle>
-										<Accordion.Collapse eventKey="0">
-											<Card className="accordion-content">
-												{archTests.map((obj, idx) => (
-													<div key={idx}>
-														<Card
-															style={{
-																marginLeft: '5%',
-																marginRight: '5%',
-																marginTop: '5%'
-															}}
-														>
-															<Card.Header as="h5">TEST ID: {obj.exam_id}</Card.Header>
-															<Card.Body>
-																<Card.Title>{obj.exam_name}</Card.Title>
-																																<Card.Text>Total Marks: {obj.exam_marks}</Card.Text>
-																<Card.Text>
-																	{obj.scored === null ? (
-																		<b>Marks Scored: Not Attempted</b>
-																	) : (
-																		<b>Marks Scored: {obj.scored}</b>
-																	)}
-																</Card.Text>
-															</Card.Body>
-														</Card>
-														<br />
-													</div>
-												))}
-											</Card>
-										</Accordion.Collapse>
-									</Card>
-								</Accordion>
-							</Col>
-							<Col xs={12} xl={6}>
-								<div style={{ marginLeft: '-15%' }}>
-									<img
-										className="login-image-signin"
-										style={{ width: '35rem', height: '35rem', marginTop: '1%', opacity: '1.0' }}
-										src={require('../assets/clip-programming.png')}
-										alt=""
-									/>
-								</div>
-							</Col>
-						</Row>
-						
 					</div>
 				);
 			}}

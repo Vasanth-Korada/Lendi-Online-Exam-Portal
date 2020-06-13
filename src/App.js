@@ -20,10 +20,9 @@ class App extends React.Component {
 								</Card>
 							</Col>
 							<Col xl={5}>
-								<div className="login-image-signin">
+								<div >
 									<img
-										
-										style={{ width: '42rem', height: '40rem'}}
+										className="login-image-signin" 
 										src={require('../src/assets/mockup_1.png')}
 										alt=""
 									/>

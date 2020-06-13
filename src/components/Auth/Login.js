@@ -81,7 +81,6 @@ class Login extends Component {
 			<UserContext.Provider value={{ state: this.state }}>
 				<div className="Login">
 					<br />
-
 					<Form className="form" onSubmit={this.loginSubmit}>
 						<Form.Group>
 							<Form.Label>USER ID: </Form.Label>
@@ -108,8 +107,7 @@ class Login extends Component {
 							/>
 						</Form.Group>
 						<Form.Group>
-							<Button
-								style={{ marginLeft: '24%', width: '50%', color: 'white', backgroundColor: '#0A79DF' }}
+							<Button className="Button"
 								type="submit"
 								variant="outline"
 								size="lg"

@@ -124,7 +124,7 @@ function Dashboard(props) {
 			{(context) => {
 				return (
 					<div>
-					<CustomSideNav className="custom-sidenav"/>
+					<CustomSideNav className="custom-sidenav" username={username}/>
 						<NavBar title={`Welcome ${username}`} resetPasswordbtn={true} username={username} />
 
 						<div className="container-fluid">

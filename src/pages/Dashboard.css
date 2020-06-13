@@ -2,3 +2,7 @@
     height: 400px;
     overflow-y: scroll;
 }
+
+.custom-sidenav {
+    height: 100%;
+}

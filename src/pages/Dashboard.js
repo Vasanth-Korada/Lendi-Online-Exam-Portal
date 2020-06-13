@@ -6,6 +6,8 @@ import NavBar from '../components/NavBar';
 import './Dashboard.css';
 import { UserContext } from '../context/userContext';
 import PropagateLoader from 'react-spinners/PropagateLoader';
+import CustomSideNav from '../components/CustomSideNav';
+
 function Dashboard(props) {
 	const [ toExam, setToExam ] = useState(false);
 	const userContext = useContext(UserContext);
@@ -122,10 +124,12 @@ function Dashboard(props) {
 			{(context) => {
 				return (
 					<div>
+					<CustomSideNav className="custom-sidenav"/>
 						<NavBar title={`Welcome ${username}`} resetPasswordbtn={true} username={username} />
+
 						<div className="container-fluid">
 							<div>
-								<h2 style={{ float: 'left', marginTop: '-5%', marginLeft: '3%' }}>
+								<h2 style={{ float: 'left', marginTop: '-5%', marginLeft: '5%' }}>
 									<b>Ongoing Tests</b>
 								</h2>
 							</div>
@@ -133,7 +137,7 @@ function Dashboard(props) {
 							{tests.map((obj, idx) => {
 								return (
 									<div className="col" key={idx}>
-										<Card style={{ marginLeft: '4%', marginRight: '5%' }}>
+										<Card style={{ marginLeft: '3.8%', marginRight: '5%' }}>
 											<Card.Header as="h5">Test ID: {obj.exam_id}</Card.Header>
 											<Card.Body>
 												<Card.Title>{obj.exam_name}</Card.Title>

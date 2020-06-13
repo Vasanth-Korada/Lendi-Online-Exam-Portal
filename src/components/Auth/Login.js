@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import './Login.css';
 import HashLoader from 'react-spinners/HashLoader';
 import { UserContext } from '../../context/userContext';
+
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -47,8 +48,8 @@ class Login extends Component {
 			console.log('LOGIN FAILED');
 			alert('Invalid Username or Password');
 			this.setState({
-				loading:false
-			})
+				loading: false
+			});
 		}
 	};
 	componentWillUnmount() {
@@ -107,7 +108,13 @@ class Login extends Component {
 							/>
 						</Form.Group>
 						<Form.Group>
-							<Button className="Button"
+							<Button
+								style={{
+									marginLeft: '25%',
+									width: '50%',
+									color: 'white',
+									backgroundColor: '#0A79DF'
+								}}
 								type="submit"
 								variant="outline"
 								size="lg"

@@ -5,7 +5,6 @@ import { Redirect } from 'react-router-dom';
 import './Login.css';
 import HashLoader from 'react-spinners/HashLoader';
 import { UserContext } from '../../context/userContext';
-
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -14,7 +13,8 @@ class Login extends Component {
 			loading: false,
 			dbpassword: '',
 			username: '', //TypedId
-			password: '' //Typed Password
+			password: '', //Typed Password
+			branch: 'CSE'
 		};
 		this.usernameChange = this.usernameChange.bind(this);
 		this.passwordChange = this.passwordChange.bind(this);
@@ -31,7 +31,7 @@ class Login extends Component {
 			loading: true
 		});
 		e.preventDefault();
-		const ref = await firebase.firestore().collection('loginData').doc(this.state.username);
+		const ref = await firebase.firestore().collection(this.state.branch).doc(this.state.username);
 		await ref
 			.get()
 			.then((doc) => {
@@ -80,11 +80,29 @@ class Login extends Component {
 		}
 		return (
 			<UserContext.Provider value={{ state: this.state }}>
+				<div class="dropdown" className="login-branch-dropdown">
+					<p className="choose-branch-text">Choose Branch</p>
+					<select
+						className="btn btn-primary btn-sm dropdown-toggle"
+						value={this.state.branch}
+						onChange={(e) =>
+							this.setState({
+								branch: e.target.value
+							})}
+						required
+					>
+						<option value="CSE">CSE</option>
+						<option value="ECE">ECE</option>
+						<option value="EEE">EEE</option>
+						<option value="MECH">MECH</option>
+					</select>
+				</div>
 				<div className="Login">
 					<br />
+
 					<Form className="form" onSubmit={this.loginSubmit}>
 						<Form.Group>
-							<Form.Label>USER ID: </Form.Label>
+							<Form.Label>Roll Number: </Form.Label>
 							<Form.Control
 								type="text"
 								placeholder="EG: 17KD1A0572"

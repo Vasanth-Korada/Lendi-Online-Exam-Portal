@@ -22,7 +22,7 @@ function CustomSideNav({ ...props }) {
 	const passwordChange = (e) => {
 		setpassword(e.target.value);
 	};
-	const handleSubmit = async (newPassword) => {
+	const handleResetPassword = async (newPassword) => {
 		await firebase
 			.firestore()
 			.collection('loginData')
@@ -64,7 +64,7 @@ function CustomSideNav({ ...props }) {
 					<Button variant="secondary" onClick={handleClose}>
 						Close
 					</Button>
-					<Button variant="primary" type="submit" onClick={() => handleSubmit(password)}>
+					<Button variant="primary" type="submit" onClick={() => handleResetPassword(password)}>
 						Reset Password
 					</Button>
 				</Modal.Footer>

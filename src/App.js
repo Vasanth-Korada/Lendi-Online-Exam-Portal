@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/Auth/Login';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import NavBar from '../src/components/NavBar';
+import 'rsuite/lib/styles/index.less';
 class App extends React.Component {
 	render() {
 		return (
@@ -13,7 +14,7 @@ class App extends React.Component {
 						<Row className="login-row">
 							<Col xl={5}>
 								<Card className="login-card">
-									<Card.Header as="h5">LOGIN HERE</Card.Header>
+									<Card.Header as="h5">STUDENT LOGIN</Card.Header>
 									<Card.Header>
 										<Login />
 									</Card.Header>

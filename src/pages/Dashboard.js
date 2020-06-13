@@ -24,11 +24,11 @@ function Dashboard(props) {
 		if (examStarted === false) {
 			setTimeout(async () => {
 				setUsername(props.location.state.username);
-
 				await firebase.firestore().collection('tests').get().then((snapshot) => {
 					snapshot.docs.forEach(async (doc) => {
 						const data = doc.data();
 						if (data.isActive) {
+							//If Exam is Active then we check for student attemption
 							var ref1 = await firebase
 								.firestore()
 								.collection('tests')
@@ -50,7 +50,8 @@ function Dashboard(props) {
 							setTests((tests) => [ ...tests, data ]);
 							setTestID(data.exam_id);
 						} else {
-							var scored = 0;
+							const unixTime = Math.round(new Date().getTime() / 1000);
+							console.log('Unix Time' + unixTime);
 							var ref2 = await firebase
 								.firestore()
 								.collection('tests')
@@ -68,7 +69,7 @@ function Dashboard(props) {
 									setarchTests((archTests) => [ ...archTests, data ]);
 								})
 								.catch((e) => {
-									console.log(e);
+									console.log(e);			
 								});
 						}
 					});
@@ -124,7 +125,7 @@ function Dashboard(props) {
 			{(context) => {
 				return (
 					<div>
-					<CustomSideNav className="custom-sidenav" username={username}/>
+						<CustomSideNav className="custom-sidenav" username={username} />
 						<NavBar title={`Welcome ${username}`} resetPasswordbtn={true} username={username} />
 
 						<div className="container-fluid">

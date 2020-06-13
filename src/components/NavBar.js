@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
 import { RiAdminLine } from 'react-icons/ri';
 import firebase from '../firebase';
+import LendiLogo from '../assets/lendi_logo_p.png'
+import "./Navbar.css"
 class NavBar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -48,7 +50,8 @@ class NavBar extends React.Component {
 			<Navbar expand="lg" variant="dark" style={{ backgroundColor: '#0A79DF', height: '5.5rem' }}>
 				<Container>
 					<Navbar.Brand className="navbar-logo">
-						<h2>
+					<img src={LendiLogo} className="lendi-logo" alt="Lendi Logo"/>
+						<h2 className="navbar-title">
 							<b>{this.props.title}</b>
 						</h2>
 					</Navbar.Brand>
@@ -59,13 +62,13 @@ class NavBar extends React.Component {
 						</Link>
 					) : (
 						<Link to="/logout">
-							<FiLogOut color="white" title="Logout" size={40} />
+							<FiLogOut className="logout-btn" color="white" title="Logout" size={40} />
 						</Link>
 					)}
 				</Container>
 				{this.props.resetPasswordbtn === true ? (
 					<Button
-						style={{ float: 'right' }}
+						className="reset-pwd-btn"
 						variant="light"
 						size="sm"
 						onClick={() => this.openModal(this.props.username)}

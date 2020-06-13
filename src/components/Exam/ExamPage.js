@@ -98,9 +98,11 @@ function ExamPage(props) {
 				.set({
 					isSubmitted: true,
 					isAttempted: true,
-					marks: score.current
+					marks: score.current,
+					submit_time: firebase.firestore.FieldValue.serverTimestamp()
 				})
 				.then(() => {
+					setloading(false);
 					setToResult(true);
 					console.log('Score:', score.current);
 				});

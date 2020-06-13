@@ -1,0 +1,18 @@
+.navbar-title {
+    display: inline-block;
+}
+
+.lendi-logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 0.5em;
+}
+
+.logout-btn {
+    display: inline-block;
+}
+
+.reset-pwd-btn {
+    display: inline-block;
+    margin-top: 2em;
+}

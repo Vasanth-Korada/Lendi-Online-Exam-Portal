@@ -3,3 +3,22 @@
     margin-right: 5%;
     margin-top: 30px;
 }
+
+.get-result-form {
+    display: flex;
+    justify-content: center;
+}
+
+.exam-id-text-field {
+    width: auto;
+}
+
+.get-result-btn {
+    display: flex;
+    margin-left: auto;
+}
+
+.form-col {
+    display: inline;
+    justify-content: center;
+}

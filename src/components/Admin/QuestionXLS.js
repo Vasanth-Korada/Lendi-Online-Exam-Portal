@@ -7,6 +7,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import './QuestionXLS.css';
 import HashLoader from 'react-spinners/HashLoader';
 import { Form } from 'formik';
+import { RiFileExcel2Line } from 'react-icons/ri';
 
 const QuestionXLS = (props) => {
 	const [ loading, setLoading ] = useState(false);
@@ -20,6 +21,7 @@ const QuestionXLS = (props) => {
 		var file = files[0];
 		const reader = new FileReader();
 		reader.onload = () => {
+			
 			csv.parse(reader.result, (err, data) => {
 				for (var i = 1; i < data.length; i++) {
 					const question = data[i][0];

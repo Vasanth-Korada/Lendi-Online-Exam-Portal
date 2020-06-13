@@ -4,6 +4,7 @@ import { Card, Form, Button, Tabs, Tab, Table, Col, Row } from 'react-bootstrap'
 import './AdminDashboard.css';
 import ResultDashboard from './AdminDashboardComponents/ResultDashboard'
 import ExamDashboard from './AdminDashboardComponents/ExamDashboard'
+import StudentDetailsUpload from './AdminDashboardComponents/StudentDetailsUpload';
 
 const AdminDashboard = () => {
 	
@@ -19,7 +20,7 @@ const AdminDashboard = () => {
 					<ResultDashboard />
 				</Tab>
 				<Tab eventKey="StudentDataUpload" title="Student Details Upload">
-					<ResultDashboard />
+					<StudentDetailsUpload/>
 				</Tab>
 			</Tabs>
 		</div>

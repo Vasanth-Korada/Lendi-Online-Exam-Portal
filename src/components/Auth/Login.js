@@ -14,7 +14,8 @@ class Login extends Component {
 			dbpassword: '',
 			username: '', //TypedId
 			password: '', //Typed Password
-			branch: 'CSE'
+			branch: 'CSE',
+			userObj: {}
 		};
 		this.usernameChange = this.usernameChange.bind(this);
 		this.passwordChange = this.passwordChange.bind(this);
@@ -36,7 +37,8 @@ class Login extends Component {
 			.get()
 			.then((doc) => {
 				const data = doc.data();
-				this.setState({ dbpassword: data.password });
+				const userData = data;
+				this.setState({ dbpassword: data.password, userObj: userData });
 			})
 			.catch((err) => {
 				console.log('Invalid Username');
@@ -65,7 +67,8 @@ class Login extends Component {
 					to={{
 						pathname: '/dashboard',
 						state: {
-							username: this.state.username
+							username: this.state.username,
+							userObj:this.state.userObj
 						}
 					}}
 				/>

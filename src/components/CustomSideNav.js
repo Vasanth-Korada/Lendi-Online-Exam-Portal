@@ -25,8 +25,8 @@ function CustomSideNav({ ...props }) {
 	const handleResetPassword = async (newPassword) => {
 		await firebase
 			.firestore()
-			.collection('loginData')
-			.doc(props.username)
+			.collection(props.userObj.branch)
+			.doc(props.userObj.regd_no)
 			.update({
 				password: newPassword
 			})
@@ -69,7 +69,7 @@ function CustomSideNav({ ...props }) {
 					</Button>
 				</Modal.Footer>
 			</Modal>
-			<VerticalCenteredModal show={profileModal} onHide={() => setprofileModal(false)} />
+			<VerticalCenteredModal show={profileModal} onHide={() => setprofileModal(false)} userObj={props.userObj} />
 			<SideNav
 				style={{ backgroundColor: '#0A79DF', height: '150%' }}
 				onSelect={(selected) => {
@@ -83,7 +83,7 @@ function CustomSideNav({ ...props }) {
 				<br />
 				<br />
 				<br />
-				<SideNav.Nav defaultSelected="dashboard">
+				<SideNav.Nav>
 					<NavItem eventKey="myprofile" onSelect={() => setprofileModal(true)}>
 						<NavIcon>
 							<FaUserCircle />

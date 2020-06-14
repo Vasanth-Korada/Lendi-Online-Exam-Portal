@@ -20,10 +20,12 @@ function Dashboard(props) {
 	const [ examStarted, setExamStarted ] = useState(false);
 	const [ loading, setloading ] = useState(false);
 	const [ isAttempted, setisAttempted ] = useState(false);
+	const [ userObj, setuserObj ] = useState({});
 	useEffect(() => {
 		if (examStarted === false) {
 			setTimeout(async () => {
-				setUsername(props.location.state.username);
+				setUsername(props.location.state.userObj.regd_no);
+				setuserObj(props.location.state.userObj);
 				await firebase.firestore().collection('tests').get().then((snapshot) => {
 					snapshot.docs.forEach(async (doc) => {
 						const data = doc.data();
@@ -69,7 +71,7 @@ function Dashboard(props) {
 									setarchTests((archTests) => [ ...archTests, data ]);
 								})
 								.catch((e) => {
-									console.log(e);			
+									console.log(e);
 								});
 						}
 					});
@@ -125,8 +127,8 @@ function Dashboard(props) {
 			{(context) => {
 				return (
 					<div>
-						<CustomSideNav className="custom-sidenav" username={username} />
-						<NavBar title={`Welcome ${username}`} resetPasswordbtn={true} username={username} />
+						<CustomSideNav className="custom-sidenav" username={username} userObj={userObj} />
+						<NavBar title={`WELCOME ${userObj.name}`} resetPasswordbtn={true} username={username} />
 
 						<div className="container-fluid">
 							<div>
@@ -141,9 +143,9 @@ function Dashboard(props) {
 										<Card style={{ marginLeft: '3.8%', marginRight: '5%' }}>
 											<Card.Header as="h5">Test ID: {obj.exam_id}</Card.Header>
 											<Card.Body>
-												<Card.Title>{obj.exam_name}</Card.Title>
-												<Card.Text>Total Question: {obj.exam_total_questions}</Card.Text>
-												<Card.Text>Duration: {obj.exam_duration}</Card.Text>
+												<Card.Title><b>{obj.exam_name}</b></Card.Title>
+												<Card.Text>Total Questions: {obj.exam_total_questions}</Card.Text>
+												<Card.Text>Duration: {obj.exam_duration} Mins</Card.Text>
 												<Card.Text>Marks: {obj.exam_marks}</Card.Text>
 												{isAttempted ? (
 													<Button

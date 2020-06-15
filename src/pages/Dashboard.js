@@ -64,8 +64,8 @@ function Dashboard(props) {
 								.get()
 								.then((doc) => {
 									const data1 = doc.data();
-									console.log(data1.marks);
-									const scored = data1.marks;
+									console.log(data1.marks_gained);
+									const scored = data1.marks_gained;
 									data['scored'] = scored;
 									console.log(data);
 									setarchTests((archTests) => [ ...archTests, data ]);
@@ -144,7 +144,9 @@ function Dashboard(props) {
 										<Card style={{ marginLeft: '3.8%', marginRight: '5%' }}>
 											<Card.Header as="h5">Test ID: {obj.exam_id}</Card.Header>
 											<Card.Body>
-												<Card.Title><b>{obj.exam_name}</b></Card.Title>
+												<Card.Title>
+													<b>{obj.exam_name}</b>
+												</Card.Title>
 												<Card.Text>Total Questions: {obj.exam_total_questions}</Card.Text>
 												<Card.Text>Duration: {obj.exam_duration} Mins</Card.Text>
 												<Card.Text>Marks: {obj.exam_marks}</Card.Text>
@@ -225,12 +227,14 @@ function Dashboard(props) {
 																</Card.Header>
 																<Card.Body>
 																	<Card.Title>{obj.exam_name}</Card.Title>
-																	<Card.Text>Total Marks: {obj.exam_marks}</Card.Text>
-																	<Card.Text>
+																	<Card.Text style={{ color: 'green' }}>
 																		{obj.scored === null ? (
 																			<b>Marks Scored: Not Attempted</b>
 																		) : (
-																			<b>Marks Scored: {obj.scored}</b>
+																			<b>
+																				Marks Scored: {obj.scored} /{' '}
+																				{obj.exam_marks}
+																			</b>
 																		)}
 																	</Card.Text>
 																</Card.Body>
@@ -247,7 +251,7 @@ function Dashboard(props) {
 									<div style={{ marginLeft: '-15%' }}>
 										<img
 											className="login-image-signin"
-											style={{ width: '35rem', height: '35rem', marginTop: '1%', opacity: '1.0' }}
+											style={{ width: 'auto', height: '35rem', marginTop: '1%', opacity: '1.0' }}
 											src={require('../assets/clip-programming.png')}
 											alt=""
 										/>

@@ -196,7 +196,7 @@ function ExamPage(props) {
 					})}
 				</div>
 				<div style={{ marginLeft: '50%', padding: '20px' }}>
-					<PropagateLoader size={20} loading={loading} color="#0A79DF" />
+					<PropagateLoader size={20} loading={loading} color="white" />
 				</div>
 				<div style={{ float: 'right', padding: '20px' }} className="mb-2">
 					<Button

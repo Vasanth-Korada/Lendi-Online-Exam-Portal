@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
+import { FaUserCircle, FaSignOutAlt, FaInfoCircle } from 'react-icons/fa';
 import { GoShield } from 'react-icons/go';
 import { Modal, Form, Button } from 'react-bootstrap';
 import firebase from '../firebase';
@@ -88,19 +88,33 @@ function CustomSideNav({ ...props }) {
 						<NavIcon>
 							<FaUserCircle />
 						</NavIcon>
-						<NavText>My Profile</NavText>
+						<NavText>
+							<b>My Profile</b>
+						</NavText>
 					</NavItem>
 					<NavItem eventKey="resetpassword" onSelect={() => openModal()}>
 						<NavIcon>
 							<GoShield />
 						</NavIcon>
-						<NavText>Reset Password</NavText>
+						<NavText>
+							<b>Reset Password</b>
+						</NavText>
+					</NavItem>
+					<NavItem eventKey="about" onSelect={() => window.open('http://lendi.org/')}>
+						<NavIcon>
+							<FaInfoCircle />
+						</NavIcon>
+						<NavText>
+							<b>Info</b>
+						</NavText>
 					</NavItem>
 					<NavItem eventKey="logout" onSelect={() => setlogout(true)}>
 						<NavIcon>
 							<FaSignOutAlt />
 						</NavIcon>
-						<NavText>Logout</NavText>
+						<NavText>
+							<b>Logout</b>
+						</NavText>
 					</NavItem>
 
 					{/* 

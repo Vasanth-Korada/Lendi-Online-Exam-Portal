@@ -84,31 +84,30 @@
 
 .score-board {
     position: relative;
-    height: 300px;
+    height: 200px;
 }
 
 .score {
-    width: 50%;
+    width: 40%;
     color: white;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin: auto;
     background-color: #0A79DF;
     padding: 10px;
-    border-radius: 50px;
+    border-radius: 8px;
     position: relative;
-    font-size: 3em;
+    font-size: 2.8em;
     top: 180px;
     text-align: center;
 }
 
 .result-image {
-    margin-top: -6%;
     width: 175px;
     height: 175px;
     position: relative;
-    width: 100%;
+    margin: auto;
+    width: 50%;
     text-align: center;
-    bottom: -11rem;
+    top: 140px;
 }
 
 .timeup-image {
@@ -125,7 +124,17 @@
     background-color: #0A79DF;
     color: white;
     border-radius: 30px;
-    width: 32%;
+    width: 30%;
     padding: 6px;
     font-size: 9px;
+}
+
+.result-stats {
+    display: flex;
+    text-align: center;
+    margin: auto;
+    margin-top: 2%;
+    justify-content: center;
+    vertical-align: middle;
+    max-width: 40%;
 }

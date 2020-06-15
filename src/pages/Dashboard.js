@@ -116,7 +116,8 @@ function Dashboard(props) {
 					pathname: '/examPage',
 					state: {
 						currentExam: currentExam,
-						username: username
+						username: username,
+						userObj: userObj
 					}
 				}}
 			/>

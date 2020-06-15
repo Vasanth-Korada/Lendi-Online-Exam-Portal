@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './style.css';
 import qBank from './quizService.js';
 import QuestionBox from './QuestionBox';
@@ -7,10 +7,7 @@ import { Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import firebase from '../../firebase';
 import { useBeforeunload } from 'react-beforeunload';
-import { UserContext } from '../../context/userContext';
 import Timer from 'react-compound-timer';
-import Fullscreen from 'react-full-screen';
-import HashLoader from 'react-spinners/HashLoader';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 
 function ExamPage(props) {
@@ -19,13 +16,12 @@ function ExamPage(props) {
 	const [ questions, setQuestions ] = useState([]);
 	const [ responses, setResponses ] = useState(0);
 	const [ toResult, setToResult ] = useState(false);
-	const providerUsername = useContext(UserContext);
 	const correctAnswers = useRef({});
 	const userAnswers = useRef({});
-	const score = useRef(1);
+	const score = useRef(0);
 	const [ examDurationMins, setexamDurationMins ] = useState(0);
-	const [ isFull, setisFull ] = useState(false);
 	const [ examover, setexamover ] = useState(false);
+	const [ userObj, setuserObj ] = useState({});
 	useBeforeunload(() => console.log('Warning'));
 
 	useEffect(
@@ -46,7 +42,7 @@ function ExamPage(props) {
 				setexamDurationMins(currentExam.exam_duration);
 			}
 			setcurrentExam(props.location.state.currentExam);
-
+			setuserObj(props.location.state.userObj);
 			async function fetchqBank() {
 				console.log('Current Exam', currentExam);
 				if (Object.keys(currentExam).length > 0) {
@@ -60,7 +56,7 @@ function ExamPage(props) {
 				setQuestions([]);
 			};
 		},
-		[ props.location.state.currentExam, currentExam, examover ]
+		[ props.location.state.currentExam, currentExam, examover, props.location.state.userObj ]
 	);
 	const computeAnswer = (choosenAnswer, correctAnswer, question) => {
 		userAnswers.current[question] = choosenAnswer;
@@ -98,7 +94,10 @@ function ExamPage(props) {
 				.set({
 					isSubmitted: true,
 					isAttempted: true,
-					marks: score.current,
+					name: userObj.name,
+					regd_no: userObj.regd_no,
+					branch: userObj.branch,
+					marks_gained: score.current,
 					submit_time: firebase.firestore.FieldValue.serverTimestamp()
 				})
 				.then(() => {
@@ -106,13 +105,13 @@ function ExamPage(props) {
 					setToResult(true);
 					console.log('Score:', score.current);
 				});
-		}, 1000);
+		}, 100);
 	};
 	const examOver = () => {
 		console.log('Exam Over');
 		setexamover(true);
 	};
-	
+
 	if (toResult) {
 		return (
 			<Redirect
@@ -122,7 +121,9 @@ function ExamPage(props) {
 						score: score.current,
 						responses: responses,
 						exam_total_questions: currentExam.exam_total_questions,
-						cuurentExam: currentExam
+						examId: currentExam.exam_id,
+						examName: currentExam.exam_name,
+						userObj: userObj
 					}
 				}}
 			/>

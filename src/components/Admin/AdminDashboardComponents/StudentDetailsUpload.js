@@ -46,8 +46,8 @@ const StudentDetailsUpload = () => {
     }
     return (
         <div className="admin">
-            <div class="dropdown">
-                <select className="btn btn-success dropdown-toggle" value={branch} onChange={e => setBranch(e.target.value)} required>
+            <div class="dropdown" style={{marginLeft:'5%'}}>
+                <select className="btn btn-primary dropdown-toggle" value={branch} onChange={e => setBranch(e.target.value)} required>
                     <option>Select Branch</option>
                     <option value="CSE">CSE</option>
                     <option value="ECE">ECE</option>

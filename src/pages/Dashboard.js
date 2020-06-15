@@ -129,7 +129,7 @@ function Dashboard(props) {
 				return (
 					<div>
 						<CustomSideNav className="custom-sidenav" username={username} userObj={userObj} />
-						<NavBar title={`WELCOME ${userObj.name}`} resetPasswordbtn={true} username={username} />
+						<NavBar emoji={true} title={`WELCOME ${userObj.name}`} username={username} />
 
 						<div className="container-fluid">
 							<div>

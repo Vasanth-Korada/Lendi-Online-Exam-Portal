@@ -11,9 +11,8 @@ class NavBar extends React.Component {
 				<Container>
 					<Navbar.Brand className="navbar-logo">
 						<h3 className="navbar-title">
-							<b>
-								{this.props.title} <span />😃
-							</b>
+							<b>{this.props.title}</b>
+							{this.props.emoji ? <span role="img">😃</span> : <div />}
 						</h3>
 					</Navbar.Brand>
 					<img src={LendiLogo} className="lendi-logo" alt="Lendi Logo" />

@@ -14,9 +14,6 @@ function MyVerticallyCenteredModal(props) {
 					<p>BRANCH:<span className="tab">{props.userObj.branch}</span></p>
 					<p>EMAIL:<span className="tab">{props.userObj.email}</span></p>
 					<p>MOBILE:<span className="tab">{props.userObj.phno}</span></p>
-					<p>BTECH AVG:<span className="tab">{props.userObj.btech_avg}</span></p>
-					<p>INTERMEDIATE:<span className="tab">{props.userObj.inter_percentage}</span></p>
-					<p>CLASS 10: <span className="tab">{props.userObj.tenth_percentage}</span></p>
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

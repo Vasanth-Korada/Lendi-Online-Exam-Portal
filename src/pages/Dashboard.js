@@ -7,6 +7,8 @@ import './Dashboard.css';
 import { UserContext } from '../context/userContext';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 import CustomSideNav from '../components/CustomSideNav';
+import { AiFillCaretDown } from 'react-icons/ai';
+import CustomModal from '../utils/Modals/CustomModal';
 
 function Dashboard(props) {
 	const [ toExam, setToExam ] = useState(false);
@@ -21,6 +23,11 @@ function Dashboard(props) {
 	const [ loading, setloading ] = useState(false);
 	const [ isAttempted, setisAttempted ] = useState(false);
 	const [ userObj, setuserObj ] = useState({});
+	const [ customModal, setcustomModal ] = useState(false);
+	const [ archivedObj, setarchivedObj ] = useState({});
+	const handlecustomModalClose = () => {
+		setcustomModal(false);
+	};
 	useEffect(() => {
 		if (examStarted === false) {
 			setTimeout(async () => {
@@ -208,14 +215,31 @@ function Dashboard(props) {
 										<Card>
 											<Accordion.Toggle as={Card.Header} eventKey="0">
 												<h5>
-													<b>My Previous Activity</b>
+													<b>
+														My Previous Activity{' '}
+														{<AiFillCaretDown style={{ float: 'right' }} />}
+													</b>
 												</h5>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey="0">
 												<Card className="accordion-content">
 													{archTests.map((obj, idx) => (
 														<div key={idx}>
+															{Object.keys(archivedObj).length !== 0 ? (
+																<CustomModal
+																	show={customModal}
+																	onHide={() => handlecustomModalClose(false)}
+																	archivedtestobj={archivedObj}
+																/>
+															) : (
+																<div />
+															)}
 															<Card
+																className="archived-test-card"
+																onClick={() => {
+																	setcustomModal(true);
+																	setarchivedObj(obj);
+																}}
 																style={{
 																	marginLeft: '5%',
 																	marginRight: '5%',
@@ -227,16 +251,10 @@ function Dashboard(props) {
 																</Card.Header>
 																<Card.Body>
 																	<Card.Title>{obj.exam_name}</Card.Title>
-																	<Card.Text style={{ color: 'green' }}>
-																		{obj.scored === null ? (
-																			<b>Marks Scored: Not Attempted</b>
-																		) : (
-																			<b>
-																				Marks Scored: {obj.scored} /{' '}
-																				{obj.exam_marks}
-																			</b>
-																		)}
-																	</Card.Text>
+																	<p style={{ color: '#0A79DF' }}>
+																		Click Here to view more (includes key & your
+																		score)
+																	</p>
 																</Card.Body>
 															</Card>
 															<br />

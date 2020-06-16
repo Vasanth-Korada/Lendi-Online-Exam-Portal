@@ -6,3 +6,7 @@
 .custom-sidenav {
     height: 100%;
 }
+
+.archived-test-card {
+    cursor: pointer;
+}

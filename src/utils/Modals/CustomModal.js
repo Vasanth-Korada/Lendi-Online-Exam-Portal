@@ -28,6 +28,7 @@ function CustomModal(props) {
 				<Table striped bordered hover size="sm" responsive>
 					<thead>
 						<tr>
+							<th>S.NO</th>
 							<th>QUESTION</th>
 							<th>CORRECT ANSWER</th>
 						</tr>
@@ -36,6 +37,7 @@ function CustomModal(props) {
 						{props.archivedtestobj.questions.map((obj, index) => {
 							return (
 								<tr key={index}>
+									<td>{index+1}</td>
 									<td>{obj.question}</td>
 									<td style={{ color: '#1BA94C' }}>
 										<b>{obj.correct_answer}</b>

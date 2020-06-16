@@ -49,7 +49,7 @@ function Dashboard(props) {
 								.then((doc) => {
 									const data = doc.data();
 									setisAttempted(data.isAttempted);
-									console.log('User Attempted Active Test', data.isAttempted);
+									console.log('User Attempted Active Exam', data.isAttempted);
 								})
 								.catch((e) => {
 									console.log(e);
@@ -141,7 +141,8 @@ function Dashboard(props) {
 						<div className="container-fluid">
 							<div>
 								<h2 style={{ float: 'left', marginTop: '-5%', marginLeft: '5%' }}>
-									<b>Ongoing Tests</b>
+									<b>Ongoing Exams</b>
+									{tests.length === 0 ? <div className="no-ongoing-exams">No Ongoing Exams</div> : <div />}
 								</h2>
 							</div>
 							<div style={{ marginTop: '100px' }} />
@@ -149,7 +150,7 @@ function Dashboard(props) {
 								return (
 									<div className="col" key={idx}>
 										<Card style={{ marginLeft: '3.8%', marginRight: '5%' }}>
-											<Card.Header as="h5">Test ID: {obj.exam_id}</Card.Header>
+											<Card.Header as="h5">Exam ID: {obj.exam_id}</Card.Header>
 											<Card.Body>
 												<Card.Title>
 													<b>{obj.exam_name}</b>
@@ -252,7 +253,7 @@ function Dashboard(props) {
 																<Card.Body>
 																	<Card.Title>{obj.exam_name}</Card.Title>
 																	<p style={{ color: '#0A79DF' }}>
-																		Click Here to view more (includes key & your
+																		Click here to view more (includes key & your
 																		score)
 																	</p>
 																</Card.Body>

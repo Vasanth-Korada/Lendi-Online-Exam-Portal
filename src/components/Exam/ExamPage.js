@@ -172,7 +172,7 @@ function ExamPage(props) {
 						<h6>Questions: {currentExam.exam_total_questions}</h6>
 						<h6>Marks: {currentExam.exam_marks}</h6>
 					</div>
-					<div style={{ verticalAlign: 'middle' }}>{currentExam.exam_name}</div>
+					<div style={{ verticalAlign: 'middle', textTransform:"uppercase" }}>{currentExam.exam_name}</div>
 				</div>
 				<div style={{ color: 'white' }} />
 				<div>
@@ -219,7 +219,7 @@ function ExamPage(props) {
 	) : (
 		<div
 			style={{
-				marginTop: '2%',
+				marginTop: '3%',
 				marginLeft: '20%',
 				marginRight: '20%',
 				textAlign: 'center'

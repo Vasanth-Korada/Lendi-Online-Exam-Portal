@@ -1,3 +1,15 @@
+.no-ongoing-exams {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    color: white;
+    padding: 8px;
+    background-color: #2876F9;
+    margin-left: 1em;
+    /* background-image: linear-gradient(to right, #6D17CB, #2876F9); */
+    border-radius: 24px;
+}
+
 .accordion-content {
     height: 400px;
     overflow-y: scroll;

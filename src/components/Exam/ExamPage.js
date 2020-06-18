@@ -91,12 +91,8 @@ function ExamPage(props) {
 				.collection('participants')
 				.doc(props.location.state.username);
 			await ref
-				.set({
+				.update({
 					isSubmitted: true,
-					isAttempted: true,
-					name: userObj.name,
-					regd_no: userObj.regd_no,
-					branch: userObj.branch,
 					marks_gained: score.current,
 					submit_time: firebase.firestore.FieldValue.serverTimestamp()
 				})
@@ -172,7 +168,7 @@ function ExamPage(props) {
 						<h6>Questions: {currentExam.exam_total_questions}</h6>
 						<h6>Marks: {currentExam.exam_marks}</h6>
 					</div>
-					<div style={{ verticalAlign: 'middle', textTransform:"uppercase" }}>{currentExam.exam_name}</div>
+					<div style={{ verticalAlign: 'middle', textTransform: 'uppercase' }}>{currentExam.exam_name}</div>
 				</div>
 				<div style={{ color: 'white' }} />
 				<div>

@@ -107,7 +107,10 @@ function Dashboard(props) {
 		await ref.set({
 			isAttempted: true,
 			isSubmitted: false,
-			marks: null
+			marks: null,
+			name: userObj.name,
+			regd_no: userObj.regd_no,
+			branch: userObj.branch
 		});
 		setCurrentExam(obj);
 		setToExam(true);
@@ -142,7 +145,11 @@ function Dashboard(props) {
 							<div>
 								<h2 style={{ float: 'left', marginTop: '-5%', marginLeft: '5%' }}>
 									<b>Ongoing Exams</b>
-									{tests.length === 0 ? <div className="no-ongoing-exams">No Ongoing Exams</div> : <div />}
+									{tests.length === 0 ? (
+										<div className="no-ongoing-exams">No Ongoing Exams</div>
+									) : (
+										<div />
+									)}
 								</h2>
 							</div>
 							<div style={{ marginTop: '100px' }} />

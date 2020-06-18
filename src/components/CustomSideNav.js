@@ -7,12 +7,15 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import firebase from '../firebase';
 import { Redirect } from 'react-router-dom';
 import VerticalCenteredModal from '../utils/VerticalCenteredModal';
+import HashLoader from 'react-spinners/HashLoader';
 
 function CustomSideNav({ ...props }) {
 	const [ showModal, setshowModal ] = useState(false);
 	const [ password, setpassword ] = useState('');
 	const [ logout, setlogout ] = useState(false);
 	const [ profileModal, setprofileModal ] = useState(false);
+	const [ loading, setloading ] = useState(false);
+	const [ currentPassword, setcurrentPassword ] = useState('');
 	const openModal = () => {
 		setshowModal(true);
 	};
@@ -23,18 +26,27 @@ function CustomSideNav({ ...props }) {
 		setpassword(e.target.value);
 	};
 	const handleResetPassword = async (newPassword) => {
-		await firebase
-			.firestore()
-			.collection(props.userObj.branch)
-			.doc(props.userObj.regd_no)
-			.update({
-				password: newPassword
-			})
-			.then(() => {
-				setshowModal(false);
-				setpassword('');
-				alert('Password updated successfully');
-			});
+		const ref = await firebase.firestore().collection(props.userObj.branch).doc(props.userObj.regd_no);
+		await ref.get().then(async (doc) => {
+			setloading(true);
+			const data = doc.data();
+			if (currentPassword === data.password) {
+				await ref
+					.update({
+						password: newPassword
+					})
+					.then(() => {
+						setshowModal(false);
+						setpassword('');
+						setcurrentPassword('');
+						setloading(false);
+						alert('Password updated successfully');
+					});
+			} else {
+				setloading(false);
+				alert('Your Current Password is Incorrect! Please try again');
+			}
+		});
 	};
 	if (logout) {
 		return <Redirect to="/" />;
@@ -48,6 +60,17 @@ function CustomSideNav({ ...props }) {
 				<Modal.Body>
 					<Form className="form">
 						<Form.Group>
+							<Form.Label>Your Current Password: </Form.Label>
+							<Form.Control
+								placeholder="4 Digit PIN"
+								value={currentPassword}
+								onChange={(e) => setcurrentPassword(e.target.value)}
+								minLength="4"
+								maxLength="4"
+								required
+							/>
+						</Form.Group>
+						<Form.Group>
 							<Form.Label>Your New Password: </Form.Label>
 							<Form.Control
 								placeholder="4 Digit PIN"
@@ -59,6 +82,13 @@ function CustomSideNav({ ...props }) {
 							/>
 						</Form.Group>
 					</Form>
+					{loading ? (
+						<div style={{ display: 'flex', justifyContent: 'center', verticalAlign: 'middle' }}>
+							<HashLoader size={50} color="#0A79DF" />
+						</div>
+					) : (
+						<div />
+					)}{' '}
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>
@@ -70,6 +100,7 @@ function CustomSideNav({ ...props }) {
 				</Modal.Footer>
 			</Modal>
 			<VerticalCenteredModal show={profileModal} onHide={() => setprofileModal(false)} userObj={props.userObj} />
+
 			<SideNav
 				style={{ backgroundColor: '#0A79DF', height: '150%' }}
 				onSelect={(selected) => {
@@ -116,21 +147,6 @@ function CustomSideNav({ ...props }) {
 							<b>Logout</b>
 						</NavText>
 					</NavItem>
-
-					{/* 
-				<NavItem eventKey="charts">
-					<NavIcon>
-						<i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
-					</NavIcon>
-					<NavText>Charts</NavText>
-					<NavItem eventKey="charts/linechart">
-						<NavText>Line Chart</NavText>
-					</NavItem>
-					<NavItem eventKey="charts/barchart">
-						<NavText>Bar Chart</NavText>
-					</NavItem>
-				</NavItem>
-				*/}
 				</SideNav.Nav>
 			</SideNav>
 		</div>

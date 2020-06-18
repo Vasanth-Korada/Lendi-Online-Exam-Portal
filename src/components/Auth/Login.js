@@ -32,7 +32,7 @@ class Login extends Component {
 			loading: true
 		});
 		e.preventDefault();
-		const ref = await firebase.firestore().collection(this.state.branch).doc(this.state.username);
+		const ref = await firebase.firestore().collection(this.state.branch).doc(this.state.username.toUpperCase());
 		await ref
 			.get()
 			.then((doc) => {
@@ -68,7 +68,7 @@ class Login extends Component {
 						pathname: '/dashboard',
 						state: {
 							username: this.state.username,
-							userObj:this.state.userObj
+							userObj: this.state.userObj
 						}
 					}}
 				/>
@@ -107,6 +107,7 @@ class Login extends Component {
 						<Form.Group>
 							<Form.Label>Roll Number: </Form.Label>
 							<Form.Control
+								style={{ textTransform: 'uppercase' }}
 								type="text"
 								placeholder="EG: 17KD1A0572"
 								value={this.state.username}

@@ -4,21 +4,55 @@
     margin-top: 30px;
 }
 
+.result-dashboard-exam-name {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #0A79DF;
+}
+
+.hash-loader {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
 .get-result-form {
     display: flex;
     justify-content: center;
 }
 
 .exam-id-text-field {
+    font-weight: bold;
+    letter-spacing: 5px;
+    font-size: 26px;
     width: auto;
+    text-transform: uppercase;
 }
 
-.get-result-btn {
-    display: flex;
-    margin-left: auto;
+.choose-branch-btn {
+    height: 50px;
+    width: 150px;
+}
+
+.fetch-result-btn {
+    display: inline-block;
+    height: 50px;
+    width: 150px;
+    margin-left: 2em;
+    justify-content: center;
+    width: 200%;
+}
+
+.fetch-exam-btn {
+    display: inline-block;
+    height: 50px;
+    margin-top: 8px;
+    justify-content: center;
+    width: 95%;
 }
 
 .form-col {
-    display: inline;
+    display: block;
     justify-content: center;
 }

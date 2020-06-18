@@ -1,13 +1,11 @@
-import React, { Component, useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import csv from 'csv';
 import Dropzone from 'react-dropzone';
 import firebase from '../../firebase';
 import NavBar from '../NavBar';
-import { Table, Button, Row, Col } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import './QuestionXLS.css';
 import HashLoader from 'react-spinners/HashLoader';
-import { Form } from 'formik';
-import { RiFileExcel2Line } from 'react-icons/ri';
 
 const QuestionXLS = (props) => {
 	const [ loading, setLoading ] = useState(false);

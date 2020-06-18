@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import firebase from '../../../firebase';
 import { Redirect } from 'react-router-dom';
-import { Card, Form, Button, Tabs, Tab, Table, Col, Row } from 'react-bootstrap';
+import { Card, Form, Button, Col } from 'react-bootstrap';
 import '../AdminDashboard.css';
 
 var examInfo;
@@ -57,7 +57,7 @@ const ExamDashboard = () => {
         <div>
             <div className="admin">
                 <Card>
-                    <Card.Header as="h5">CREATE EXAM HERE :)</Card.Header>
+                    <Card.Header as="h5">CREATE EXAM HERE</Card.Header>
                     <Card.Header>
                         <Form onSubmit={formik.handleSubmit}>
                             <Form.Group>

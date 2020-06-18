@@ -1,23 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import firebase from '../../../firebase';
-import { Redirect } from 'react-router-dom';
-import { Card, Form, Button, Tabs, Tab, Table, Col, Row, Dropdown } from 'react-bootstrap';
+import { Form, Button, Table, Col, Row } from 'react-bootstrap';
 import '../AdminDashboard.css';
+import { HashLoader } from 'react-spinners';
 var Results = [];
 const ResultDashboard = () => {
+	const [ examName, setexamName ] = useState('');
+	const [ loading, setloading ] = useState(false);
 	const resultFormik = useFormik({
 		initialValues: {
 			exam_id: '',
 			branch: 'ALL'
 		},
 		onSubmit: async (values) => {
+			setloading(true);
 			Results = [];
+			var ref = await firebase.firestore().collection('tests').doc(values.exam_id);
+			await ref.get().then((doc) => {
+				const data = doc.data();
+				setexamName(data.exam_name);
+			});
 			if (resultFormik.values.branch === 'ALL') {
-				await firebase
-					.firestore()
-					.collection('tests')
-					.doc(values.exam_id)
+				ref
 					.collection('participants')
 					.orderBy('marks_gained', 'desc')
 					.orderBy('submit_time')
@@ -34,16 +39,14 @@ const ResultDashboard = () => {
 								branch: data.branch
 							});
 						});
+						setloading(false);
 					})
 					.catch((e) => {
 						console.log(e);
 						window.alert('Invalid Test ID!');
 					});
 			} else {
-				await firebase
-					.firestore()
-					.collection('tests')
-					.doc(values.exam_id)
+				ref
 					.collection('participants')
 					.where('branch', '==', resultFormik.values.branch)
 					.orderBy('marks_gained', 'desc')
@@ -62,6 +65,7 @@ const ResultDashboard = () => {
 								branch: data.branch
 							});
 						});
+						setloading(false);
 					})
 					.catch((e) => {
 						console.log(e);
@@ -77,16 +81,14 @@ const ResultDashboard = () => {
 				<Col className="form-col">
 					<Row>
 						<Form.Group>
-							<Form.Label>Enter Test ID</Form.Label>
+							<Form.Label>Enter Exam ID</Form.Label>
 							<Form.Control
-								size="lg"
 								className="exam-id-text-field"
-								name="exam_id"
-								id="exam_id"
+								name="result_exam_id"
+								id="result_exam_id"
 								value={resultFormik.values.exam_id}
 								onChange={resultFormik.handleChange}
 								type="text"
-								placeholder="Enter Exam Id"
 								required
 							/>
 						</Form.Group>
@@ -98,9 +100,9 @@ const ResultDashboard = () => {
 							<Row>
 								<Form.Group>
 									<select
-										id="branch"
+										id="result-branch"
 										size="lg"
-										className="btn btn-primary dropdown-toggle"
+										className="btn btn-primary dropdown-toggle choose-branch-btn"
 										value={resultFormik.values.branch}
 										onChange={resultFormik.handleChange}
 										required
@@ -112,22 +114,30 @@ const ResultDashboard = () => {
 										<option value="EEE">EEE</option>
 									</select>
 								</Form.Group>
+								<Row>
+									<Form.Group>
+										<Button size="lg" className="fetch-result-btn" variant="success" type="submit">
+											Fetch Result
+										</Button>
+									</Form.Group>
+								</Row>
 							</Row>
 						</Col>
 					</Row>
-
-					<Row>
-						<Form.Group>
-							<Button className="get-result-btn" variant="success" type="submit">
-								Get Result
-							</Button>
-						</Form.Group>
-					</Row>
 				</Col>
 			</Form>
-
+			{loading ? (
+				<div className="hash-loader">
+					<HashLoader size={50} color="#0A79DF" />
+				</div>
+			) : (
+				<div />
+			)}
 			{Results.length ? (
 				<div>
+					<div className="result-dashboard-exam-name">
+						<p>Exam Name: {examName}</p>
+					</div>
 					<Table striped bordered hover size="sm">
 						<thead>
 							<tr>

@@ -19,7 +19,7 @@ const AdminDashboard = () => {
 				<Tab eventKey="Results" title="Result Dashboard">
 					<ResultDashboard />
 				</Tab>
-				<Tab eventKey="StudentDataUpload" title="Student Details Upload">
+				<Tab eventKey="StudentDataUpload" title="Student Data Upload">
 					<StudentDetailsUpload/>
 				</Tab>
 			</Tabs>

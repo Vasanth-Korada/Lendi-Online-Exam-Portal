@@ -15,7 +15,6 @@ class NavBar extends React.Component {
 							{this.props.emoji ? <span role="img">😃</span> : <div />}
 						</h3>
 					</Navbar.Brand>
-					<img src={LendiLogo} className="lendi-logo" alt="Lendi Logo" />
 					{this.props.buttonType === 'adminLogin' ? (
 						<Link to="/adminLogin">
 							<RiAdminLine color="white" title="ADMIN" size={40} />

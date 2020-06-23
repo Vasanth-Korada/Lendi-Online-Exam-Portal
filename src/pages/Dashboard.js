@@ -107,7 +107,6 @@ function Dashboard(props) {
 		await ref.set({
 			isAttempted: true,
 			isSubmitted: false,
-			marks: null,
 			name: userObj.name,
 			regd_no: userObj.regd_no,
 			branch: userObj.branch

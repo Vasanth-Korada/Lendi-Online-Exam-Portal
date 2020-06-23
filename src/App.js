@@ -8,7 +8,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
-				<NavBar title="Lendi Online Exam Portal" buttonType="adminLogin" />
+				<NavBar title="Online Exam Portal" buttonType="adminLogin" />
 				<div className='col'>
 					<Container>
 						<Row className="login-row">

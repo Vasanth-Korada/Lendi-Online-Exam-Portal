@@ -10,7 +10,7 @@ const AdminLogin = () => {
 	const loginSubmit = (e) => {
 		e.preventDefault();
 		console.log(username, password);
-		if (username === 'admin' && password === '1234') {
+		if (username === 'admin' && password === 'lendi@cse') {
 			setToAdminLogin(true);
 		}
 	};
@@ -61,11 +61,9 @@ const AdminLogin = () => {
 											<Form.Label>Password: </Form.Label>
 											<Form.Control
 												type="password"
-												placeholder="4 Digit PIN"
+												placeholder="Enter Password"
 												value={password}
 												onChange={(e) => setPassword(e.target.value)}
-												minLength="4"
-												maxLength="4"
 												required
 											/>
 										</Form.Group>

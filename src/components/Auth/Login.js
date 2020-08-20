@@ -83,7 +83,7 @@ class Login extends Component {
 		}
 		return (
 			<UserContext.Provider value={{ state: this.state }}>
-				<div className="dropdown" className="login-branch-dropdown">
+				<div className="dropdown login-branch-dropdown" >
 					<p className="choose-branch-text">Choose Branch</p>
 					<select
 						className="btn btn-primary btn-sm dropdown-toggle"

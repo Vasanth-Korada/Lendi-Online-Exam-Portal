@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { Radio, RadioGroup } from 'react-radio-group';
+import React from 'react';
+import {  Form } from 'react-bootstrap';
+import {  RadioGroup } from 'react-radio-group';
 
 const QuestionBox = ({ question, options, selected }) => {
-	const [ answer, setAnswer ] = useState(options);
-	const [ color, setColor ] = useState([ 'tomato', 'tomato', 'tomato', 'tomato' ]);
+	const answer = options;
 	return (
 		<div className="questionBox">
 			<div className="exam-question">{question}</div>

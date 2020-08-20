@@ -131,7 +131,8 @@ function ExamPage(props) {
 				<div />
 				<div className="exam-timer-box">
 					<h3>
-						🕐
+						<span>🕐</span>
+						{/* */}
 						<b style={{ float: 'right' }}>
 							{examDurationMins !== 0 ? (
 								<Timer

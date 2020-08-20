@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 
 const Result = (props) => {
 	useEffect(() => {
-		var elem = document.documentElement;
+		// var elem = document.documentElement;
 
 		if (document.mozCancelFullScreen) {
 			/* Firefox */

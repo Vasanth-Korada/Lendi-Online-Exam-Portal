@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { RiAdminLine } from 'react-icons/ri';
-import LendiLogo from '../assets/lendi_logo_p.png';
 import './Navbar.css';
 class NavBar extends React.Component {
 	render() {
@@ -12,7 +11,10 @@ class NavBar extends React.Component {
 					<Navbar.Brand className="navbar-logo">
 						<h3 className="navbar-title">
 							<b>{this.props.title}</b>
+							{/*
 							{this.props.emoji ? <span role="img">😃</span> : <div />}
+							
+							*/}
 						</h3>
 					</Navbar.Brand>
 					{this.props.buttonType === 'adminLogin' ? (

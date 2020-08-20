@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Accordion, Container, Button, Card, Row, Col } from 'react-bootstrap';
+import { Accordion,  Button, Card, Row, Col } from 'react-bootstrap';
 import firebase from '../firebase.js';
 import { Redirect } from 'react-router-dom';
 import NavBar from '../components/NavBar';
@@ -12,7 +12,6 @@ import CustomModal from '../utils/Modals/CustomModal';
 
 function Dashboard(props) {
 	const [ toExam, setToExam ] = useState(false);
-	const userContext = useContext(UserContext);
 	const [ toHome, setToHome ] = useState(false);
 	const [ tests, setTests ] = useState([]);
 	const [ archTests, setarchTests ] = useState([]);

@@ -72,7 +72,7 @@ const QuestionXLS = (props) => {
 		<div>
 			<NavBar title="Admin Area" />
 			{flag ? (
-				<div class="Table">
+				<div className="Table">
 					<Table striped bordered hover size="sm">
 						<thead>
 							<tr>

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
 import firebase from '../../firebase';
 import { Redirect } from 'react-router-dom';
 import './Login.css';
 import HashLoader from 'react-spinners/HashLoader';
-import { UserContext } from '../../context/userContext';
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -82,72 +80,62 @@ class Login extends Component {
 			);
 		}
 		return (
-			<UserContext.Provider value={{ state: this.state }}>
-				<div className="dropdown login-branch-dropdown" >
-					<p className="choose-branch-text">Choose Branch</p>
-					<select
-						className="btn btn-primary btn-sm dropdown-toggle"
-						value={this.state.branch}
-						onChange={(e) =>
-							this.setState({
-								branch: e.target.value
-							})}
-						required
-					>
-						<option value="CSE">CSE</option>
-						<option value="ECE">ECE</option>
-						<option value="EEE">EEE</option>
-						<option value="MECH">MECH</option>
-					</select>
-				</div>
-				<div className="Login">
-					<br />
-
-					<Form className="form" onSubmit={this.loginSubmit}>
-						<Form.Group>
-							<Form.Label>Roll Number: </Form.Label>
-							<Form.Control
-								style={{ textTransform: 'uppercase' }}
-								type="text"
-								placeholder="EG: 17KD1A0572"
-								value={this.state.username}
-								onChange={this.usernameChange}
-								minLength="10"
-								maxLength="10"
+			<form onSubmit={this.loginSubmit}>
+				<div className="form-group">
+					<div className="row branch-dropdown">
+						<div>Choose Branch:</div>
+						<div className="dropdown">
+							<select
+								className="btn btn-primary btn-sm dropdown-toggle"
+								value={this.state.branch}
+								onChange={(e) =>
+									this.setState({
+										branch: e.target.value
+									})}
 								required
-							/>
-						</Form.Group>
-						<Form.Group>
-							<Form.Label>Password: </Form.Label>
-							<Form.Control
-								type="password"
-								placeholder="4 Digit PIN"
-								value={this.state.password}
-								onChange={this.passwordChange}
-								minLength="4"
-								maxLength="4"
-								required
-							/>
-						</Form.Group>
-						<Form.Group>
-							<Button
-								style={{
-									marginLeft: '25%',
-									width: '50%',
-									color: 'white',
-									backgroundColor: '#0A79DF'
-								}}
-								type="submit"
-								variant="outline"
-								size="lg"
 							>
-								LOGIN
-							</Button>
-						</Form.Group>
-					</Form>
-					<br />
+								<option value="CSE">CSE</option>
+								<option value="ECE">ECE</option>
+								<option value="EEE">EEE</option>
+								<option value="MECH">MECH</option>
+							</select>
+						</div>
+					</div>
 				</div>
-			</UserContext.Provider>
+				<div className="form-group">
+					<label htmlFor="exampleInputEmail1">Roll Number:</label>
+					<input
+						type="text"
+						className="form-control regd-field"
+						id="exampleInputEmail1"
+						aria-describedby="emailHelp"
+						placeholder="EG: 17KD1A0572"
+						style={{ textTransform: 'uppercase' }}
+						value={this.state.username}
+						onChange={this.usernameChange}
+						minLength="10"
+						maxLength="10"
+						required
+					/>
+				</div>
+				<div className="form-group">
+					<label htmlFor="exampleInputPassword1">PIN:</label>
+					<input
+						type="password"
+						className="form-control"
+						id="exampleInputPassword1"
+						placeholder="4 Digit PIN"
+						value={this.state.password}
+						onChange={this.passwordChange}
+						minLength="4"
+						maxLength="4	"
+						required
+					/>
+				</div>
+				<button type="submit" className="btn btn-block btn-primary">
+					LOGIN
+				</button>
+			</form>
 		);
 	}
 }

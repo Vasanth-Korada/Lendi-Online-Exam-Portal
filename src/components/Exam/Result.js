@@ -17,22 +17,21 @@ const Result = (props) => {
 		}
 	});
 	return (
-		<div>
-			<div style={{ marginTop: '-10%' }} className="score">
-				<h6>
-					<i>We are as fast as you and so here is your result </i>
-				</h6>
-				<b>Your Result!</b>
-				<br />
-				<b>
-					Marks: {props.location.state.score} / {props.location.state.exam_total_questions}
-				</b>
+		<div className="col">
+			<div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div className="score">
+					<h6>
+						<i>We are as fast as you and so here is your result </i>
+					</h6>
+					<b>Your Result!</b>
+					<br />
+					<b>
+						Marks: {props.location.state.score} / {props.location.state.exam_total_questions}
+					</b>
+				</div>
 			</div>
-
-			<div className="result-image">
-				<img style={{ width: '35rem', height: '40rem' }} src={require('../../assets/clip-1.png')} alt="" />
-			</div>
-			<div className="result-stats">
+			<br />
+			<div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 result-stats">
 				<Table striped bordered hover size="sm" responsive>
 					<thead>
 						<tr>
@@ -52,8 +51,11 @@ const Result = (props) => {
 					</tbody>
 				</Table>
 			</div>
-			<div className="credits-box">
-				<h6>Developed with ❤ by Vasanth Korada | Srikanth Mudili</h6>
+			<div className="text-center col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<img style={{width:"30%"}} src={require('../../assets/done-5.png')} alt="result-img" />
+			</div>
+			<div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-primary text-center credits-box">
+				Developed with ❤ by Vasanth Korada | Srikanth Mudili
 			</div>
 		</div>
 	);

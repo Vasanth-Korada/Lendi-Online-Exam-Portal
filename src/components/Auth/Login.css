@@ -2,8 +2,32 @@
     border-color: #0A79DF;
 }
 
-.choose-branch-text {
-    float: left;
-    margin-top: 0.2em;
-    margin-right: 18em;
+.branch-dropdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-left: 2px;
+}
+
+.student-login {
+    border: solid 1px;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.student-login-card {
+    display: flex;
+    justify-content: center;
+    min-width: 50%;
+    margin-bottom: 50px;
+}
+
+.card-title {
+    font-weight: bolder;
+    color: #0A79DF;
+    font-size: 20px;
+}
+
+.regd-field {
+    text-transform: uppercase;
 }

@@ -1,19 +1,38 @@
-.login-card {
-    background: linear-gradient(90deg, #E6E6FA 0% 100%);
-    color: black;
-    margin-top: 14%;
-    width: 120%;
-    /* margin-left: 5%; */
-    /* margin-right: 25%; */
+body {
+    background-color: #efefef;
 }
 
-.login-row {
-    margin-top: 8%;
-   
+.container {
+    background-image: linear-gradient(to bottom, rgb(22, 104, 197), rgb(54, 138, 218));
+    display: flex;
+    margin-top: 5%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #98c4ee;
+    border-radius: 12px;
 }
 
-.login-image-signin {
-    margin-left: 30%;
-    width: 40rem;
-    height :40 rem;
+.brand-logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bolder;
+    justify-content: flex-start;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 90px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    border-radius: 12px;
+    width: 85%;
+    background-color: #0A79DF;
+}
+
+label {
+    color: #0A79DF;
 }

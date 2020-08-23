@@ -131,8 +131,7 @@ function ExamPage(props) {
 				<div />
 				<div className="exam-timer-box">
 					<h3>
-						<span>🕐</span>
-						{/* */}
+					<span role="img" aria-label="clock">🕐</span> 
 						<b style={{ float: 'right' }}>
 							{examDurationMins !== 0 ? (
 								<Timer

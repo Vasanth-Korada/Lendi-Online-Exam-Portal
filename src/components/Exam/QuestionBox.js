@@ -7,10 +7,11 @@ const QuestionBox = ({ question, options, selected }) => {
 	return (
 		<div className="questionBox">
 			<div className="exam-question">{question}</div>
-
-			<RadioGroup key={question}>
+			
+			 <RadioGroup key={question}>
 				{answer !== undefined ? (
 					answer.map((text, index) => (
+						text !== "" &&
 						<div key={index}>
 							<Form.Check
 								custom

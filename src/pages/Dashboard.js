@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Accordion,  Button, Card, Row, Col } from 'react-bootstrap';
 import firebase from '../firebase.js';
 import { Redirect } from 'react-router-dom';

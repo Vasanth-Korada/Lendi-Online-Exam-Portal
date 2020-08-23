@@ -74,9 +74,7 @@ function ExamPage(props) {
 			Object.entries(correctAnswers.current).forEach((entry1) => {
 				const correctEntry = entry1;
 				if (userEntry[0] === correctEntry[0]) {
-					console.log('Questions Matched');
 					if (userEntry[1] === correctEntry[1]) {
-						console.log('Answers Matched');
 						score.current++;
 					}
 				}

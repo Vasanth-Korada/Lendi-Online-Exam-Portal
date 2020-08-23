@@ -7,8 +7,6 @@ export const getAllExams = async () => {
 			allExams.push(doc.data());
 		});
 	});
-	console.log('getAllExams func');
-	console.log(allExams);
 	return allExams;
 };
 
@@ -24,12 +22,9 @@ export const isAttempted = async (examId, username) => {
 		.then((doc) => {
 			const data = doc.data();
 			isAttempted = data.isAttempted;
-			console.log('User Attempted Active Exam', data.isAttempted);
 		})
 		.catch((e) => {
 			isAttempted = false;
-			console.log('User Attempted Active Exam', isAttempted);
 		});
-	console.log(isAttempted);
 	return isAttempted;
 };

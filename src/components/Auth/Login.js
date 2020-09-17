@@ -119,7 +119,7 @@ class Login extends Component {
 					/>
 				</div>
 				<div className="form-group">
-					<label htmlFor="exampleInputPassword1">PIN:</label>
+					<label htmlFor="exampleInputPassword1">Enter Password:</label>
 					<input
 						type="password"
 						className="form-control"
@@ -128,7 +128,7 @@ class Login extends Component {
 						value={this.state.password}
 						onChange={this.passwordChange}
 						minLength="4"
-						maxLength="4	"
+						maxLength="4"
 						required
 					/>
 				</div>

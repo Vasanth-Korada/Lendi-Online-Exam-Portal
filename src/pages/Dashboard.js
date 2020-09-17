@@ -22,34 +22,37 @@ function Dashboard(props) {
 		setcustomModal(false);
 	};
 
-	useEffect(() => {
-		setuserInfo(props.location.state.userObj);
-		getAllExams().then((allExams) => {
-			setallExams(allExams);
-		});
-		getAllExams().then(async (allExams) => {
-			allExams.map(async (exam) => {
-				var ref2 = await firebase
-					.firestore()
-					.collection('tests')
-					.doc(exam.exam_id)
-					.collection('participants')
-					.doc(props.location.state.userObj.regd_no);
-				ref2
-					.get()
-					.then((doc) => {
-						const data1 = doc.data();
-						if (data1.isSubmitted) {
-							let temp = Object.assign(exam, data1);
-							setpreviousExams((exams) => [ ...exams, temp ]);
-						}
-					})
-					.catch((e) => {
-						console.log(e);
-					});
+	useEffect(
+		() => {
+			setuserInfo(props.location.state.userObj);
+			getAllExams().then((allExams) => {
+				setallExams(allExams);
 			});
-		});
-	}, []);
+			getAllExams().then(async (allExams) => {
+				allExams.map(async (exam) => {
+					var ref2 = await firebase
+						.firestore()
+						.collection('tests')
+						.doc(exam.exam_id)
+						.collection('participants')
+						.doc(props.location.state.userObj.regd_no);
+					ref2
+						.get()
+						.then((doc) => {
+							const data1 = doc.data();
+							if (!exam.isActive && data1.isSubmitted) {
+								let temp = Object.assign(exam, data1);
+								setpreviousExams((exams) => [ ...exams, temp ]);
+							}
+						})
+						.catch((e) => {
+							console.log(e);
+						});
+				});
+			});
+		},
+		[ props.location.state.userObj ]
+	);
 
 	const handleStartTest = async (exam, username) => {
 		isAttempted(exam.exam_id, username).then(async (data) => {
@@ -114,16 +117,19 @@ function Dashboard(props) {
 									exam.isActive && (
 										<div
 											key={index}
-											className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mt-4 mb-4 exam-cards-col"
+											className="col-xl-10 col-lg-10 col-md-6 col-sm-10 col-10 mt-4 mb-4 exam-cards-col"
 										>
 											<ExamCard exam={exam} />
 											<br />
-											<div
-												className="btn btn-primary btn-block start-test-btn"
-												onClick={() => handleStartTest(exam, userInfo.regd_no)}
-											>
-												START TEST
+											<div className="start-test-btn-div">
+												<div
+													className="btn btn-primary start-test-btn"
+													onClick={() => handleStartTest(exam, userInfo.regd_no)}
+												>
+													START TEST
+												</div>
 											</div>
+
 											<div style={{ visibility: 'hidden' }}>{++examCounter}</div>
 										</div>
 									)

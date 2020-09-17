@@ -1,16 +1,35 @@
 .login-card {
     background: linear-gradient(90deg, #E6E6FA 0% 100%);
     color: black;
-    margin-top: 20%;
-    width: 120%;
-    /* margin-left: 5%;
-    margin-right: 5%; */
+    width: 500px;
 }
 
-.login-row {
-    margin-top: 5%;
+.admin-login {
+    background: none;
+}
+
+.flex-admin-login {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 18px;
+    margin: 32px;
+    margin-top: 8%;
+    border: solid 2px #0A79DF;
+    border-radius: 16px;
 }
 
 .login-image {
-    margin-left: -25%;
+    width: 350px;
+    height: 350px;
+}
+
+.admin-login-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0A79DF;
+    color: white;
+    text-align: center;
 }

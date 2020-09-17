@@ -10,9 +10,11 @@
     margin-right: auto;
 }
 
-.accordion-content {
-    height: 400px;
-    overflow-y: scroll;
+.dashboard-tabs {
+    padding: 22px;
+    margin-top: 12px;
+    border: solid 1px #121212;
+    border-radius: 14px;
 }
 
 .custom-sidenav {
@@ -22,12 +24,14 @@
 
 .archived-test-card {
     cursor: pointer;
-    padding: 12px;
-    background: linear-gradient(#146cbe, #2060eb);
-    border-radius: 24px;
+    padding: 16px;
+    margin: 14px;
 }
 
 .exam-cards-col {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     margin-left: 2em;
     padding: 12px;
     border: solid 1px;
@@ -37,4 +41,25 @@
 
 .dashboard-tabs {
     margin-left: 50px;
+}
+
+.start-test-btn-div {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: 50%;
+}
+
+.start-test-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    border: 2px solid 2876F9;
+    background-color: white;
+    color: black;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
 }

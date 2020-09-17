@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Result = (props) => {
 	useEffect(() => {
@@ -55,8 +56,9 @@ const Result = (props) => {
 				<img style={{width:"30%"}} src={require('../../assets/done-5.png')} alt="result-img" />
 			</div>
 			<div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-primary text-center credits-box">
-				Developed with ❤ by Vasanth Korada | Srikanth Mudili
+				Developed with ❤ by Vasanth Korada
 			</div>
+			<Link className="home-link" to="/">Go to Home</Link>
 		</div>
 	);
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Card } from 'react-bootstrap';
 import './AdminLogin.css';
 import NavBar from '../NavBar';
 const AdminLogin = () => {
@@ -29,66 +29,45 @@ const AdminLogin = () => {
 	return (
 		<div>
 			<NavBar title="Admin Login" />
-			<Container>
-				<Row className="login-row">
-					<Col>
+			<div className="flex-admin-login">
+				<div>
+					<img className="login-image" src={require('../../assets/clip-sign-in.png')} alt="" />
+				</div>
+				<Card className="login-card">
+					<Card.Header as="h5">LOGIN HERE</Card.Header>
+					<Card.Header>
 						<div>
-							<img
-								className="login-image"
-								style={{ width: '35rem', height: '30rem', marginTop: '10%' }}
-								src={require('../../assets/clip-sign-in.png')}
-								alt=""
-							/>
+							<Form className="form" onSubmit={loginSubmit}>
+								<Form.Group>
+									<Form.Label>Username: </Form.Label>
+									<Form.Control
+										type="text"
+										placeholder="EG: LT12345"
+										value={username}
+										onChange={(e) => setUsername(e.target.value)}
+										required
+									/>
+								</Form.Group>
+								<Form.Group>
+									<Form.Label>Password: </Form.Label>
+									<Form.Control
+										type="password"
+										placeholder="Enter Password"
+										value={password}
+										onChange={(e) => setPassword(e.target.value)}
+										required
+									/>
+								</Form.Group>
+								<Form.Group>
+									<Button type="submit" className="btn-block admin-login-btn" variant="outline" size="lg">
+										LOGIN
+									</Button>
+								</Form.Group>
+							</Form>
 						</div>
-					</Col>
-					<Col>
-						<Card className="login-card">
-							<Card.Header as="h5">LOGIN HERE</Card.Header>
-							<Card.Header>
-								<div className="login">
-									<Form className="form" onSubmit={loginSubmit}>
-										<Form.Group>
-											<Form.Label>USER ID: </Form.Label>
-											<Form.Control
-												type="text"
-												placeholder="EG: LT12345"
-												value={username}
-												onChange={(e) => setUsername(e.target.value)}
-												required
-											/>
-										</Form.Group>
-										<Form.Group>
-											<Form.Label>Password: </Form.Label>
-											<Form.Control
-												type="password"
-												placeholder="Enter Password"
-												value={password}
-												onChange={(e) => setPassword(e.target.value)}
-												required
-											/>
-										</Form.Group>
-										<Form.Group>
-											<Button
-												style={{
-													marginLeft: '24%',
-													width: '50%',
-													color: 'white',
-													backgroundColor: '#0A79DF'
-												}}
-												type="submit"
-												variant="outline"
-												size="lg"
-											>
-												LOGIN
-											</Button>
-										</Form.Group>
-									</Form>
-								</div>
-							</Card.Header>
-						</Card>
-					</Col>
-				</Row>
-			</Container>
+					</Card.Header>
+				</Card>
+			</div>
 		</div>
 	);
 };

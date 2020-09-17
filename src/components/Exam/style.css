@@ -123,3 +123,9 @@
     vertical-align: middle;
     max-width: 40%;
 }
+
+.home-link {
+    display: flex;
+    justify-content: center;
+    padding-top: 14px;
+}

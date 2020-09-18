@@ -83,7 +83,7 @@ function Dashboard(props) {
 						.doc(userInfo.regd_no);
 					await ref
 						.set({
-							isAttempted: true,
+							isAttempted: true, 
 							isSubmitted: false,
 							name: userInfo.name,
 							regd_no: userInfo.regd_no,

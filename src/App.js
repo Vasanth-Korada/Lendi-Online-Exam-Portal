@@ -7,6 +7,7 @@ import { RiAdminLine } from 'react-icons/ri';
 const App = () => {
 	return (
 		<div className="container">
+			{sessionStorage.clear()}
 			<div className="text-white header">
 				<div className="brand-logo">
 					<a className="navbar-brand" href="/">
@@ -21,8 +22,8 @@ const App = () => {
 					<div className="text-white">Lendi Online Exam Portal</div>
 				</div>
 				<Link to="/adminLogin">
-						<RiAdminLine color="white" title="ADMIN" size={40} />
-					</Link>
+					<RiAdminLine color="white" title="ADMIN" size={40} />
+				</Link>
 			</div>
 			<div className="row student-login-card">
 				<div className="col-12 card">
@@ -36,7 +37,6 @@ const App = () => {
 				</div>
 			</div>
 		</div>
-		
 	);
 };
 export default App;

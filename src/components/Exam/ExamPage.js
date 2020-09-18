@@ -6,7 +6,6 @@ import QuestionBox from './QuestionBox';
 import { Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import firebase from '../../firebase';
-import { useBeforeunload } from 'react-beforeunload';
 import Timer from 'react-compound-timer';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 
@@ -22,10 +21,33 @@ function ExamPage(props) {
 	const [ examDurationMins, setexamDurationMins ] = useState(0);
 	const [ examover, setexamover ] = useState(false);
 	const [ userObj, setuserObj ] = useState({});
-	useBeforeunload(() => console.log('Warning'));
+	window.onload = function() {
+		document.onkeydown = function(e) {
+			return (e.which || e.keyCode) !== 116;
+		};
+	};
 
 	useEffect(
 		() => {
+			// if (window.performance) {
+			// 	if (performance.navigation.type === 1) {
+			// 		console.log('Reloaded');
+			// 		var counter = parseInt(sessionStorage.getItem('refreshCounter'));
+			// 		if (isNaN(counter)) {
+			// 			counter = 0;
+			// 		}
+			// 		if (counter >= 2) {
+			// 			sessionStorage.clear();
+			// 			return;
+			// 			// setToHome(true);
+			// 		} else {
+			// 			sessionStorage.setItem('refreshCounter', ++counter);
+			// 		}
+			// 	} else {
+			// 		// alert('This page is not reloaded');
+			// 	}
+			// }
+
 			document.addEventListener('contextmenu', (event) => event.preventDefault());
 			var elem = document.documentElement;
 			if (elem.mozRequestFullScreen) {
@@ -107,6 +129,7 @@ function ExamPage(props) {
 	};
 
 	if (toResult) {
+		sessionStorage.clear();
 		return (
 			<Redirect
 				to={{
@@ -129,7 +152,9 @@ function ExamPage(props) {
 				<div />
 				<div className="exam-timer-box">
 					<h3>
-					<span role="img" aria-label="clock">🕐</span> 
+						<span role="img" aria-label="clock">
+							🕐
+						</span>
 						<b style={{ float: 'right' }}>
 							{examDurationMins !== 0 ? (
 								<Timer
@@ -154,6 +179,7 @@ function ExamPage(props) {
 							) : (
 								<div>Loading ...</div>
 							)}
+							<h6>Please do not perform any page reload operations else exam will be terminated</h6>
 						</b>
 					</h3>
 				</div>

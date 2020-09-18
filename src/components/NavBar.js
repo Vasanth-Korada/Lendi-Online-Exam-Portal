@@ -13,7 +13,6 @@ class NavBar extends React.Component {
 				style={{
 					backgroundColor: '#0A79DF',
 					height: '5.5rem',
-					width: '100%'
 				}}
 			>
 				<Navbar.Brand className="navbar-logo">

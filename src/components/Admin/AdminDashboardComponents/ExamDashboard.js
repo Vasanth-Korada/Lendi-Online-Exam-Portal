@@ -19,6 +19,7 @@ const ExamDashboard = () => {
 			total_marks: undefined,
 			total_questions: undefined,
 			exam_pin: '',
+			dept: '',
 			Path: ''
 		},
 		onSubmit: async (values) => {
@@ -34,7 +35,8 @@ const ExamDashboard = () => {
 				exam_name: values.exam_name,
 				exam_marks: values.total_marks,
 				exam_total_questions: values.total_questions,
-				exam_pin: values.exam_pin
+				exam_pin: values.exam_pin,
+				dept: values.dept
 			});
 			console.log(values);
 			setToQuestion(true);
@@ -143,6 +145,24 @@ const ExamDashboard = () => {
 									onChange={formik.handleChange}
 									required
 								/>
+							</Form.Group>
+							<Form.Group>
+								<Form.Label>Choose Department:</Form.Label>
+								<br />
+								<select
+									id="dept"
+									name="dept"
+									value={formik.values.dept}
+									onChange={formik.handleChange}
+									className="btn btn-primary dropdown-toggle "
+									required
+								>
+									<option value={'CSE'}>CSE</option>
+									<option value={'ECE'}>ECE</option>
+									<option value={'EEE'}>EEE</option>
+									<option value={'MECH'}>MECH</option>
+									<option value={'CSSE'}>CSSE</option>
+								</select>
 							</Form.Group>
 							<Form.Group>
 								<Form.Label>Create Exam PIN: </Form.Label>

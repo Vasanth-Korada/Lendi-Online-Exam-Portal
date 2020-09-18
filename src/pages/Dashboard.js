@@ -17,6 +17,18 @@ function Dashboard(props) {
 	const [ customModal, setcustomModal ] = useState(false);
 	const [ archivedObj, setarchivedObj ] = useState({});
 	const [ previousExams, setpreviousExams ] = useState([]);
+	const quotes = [
+		"'I find that the harder I work, the more luck I seem to have.' - Thomas Jefferson",
+		'“A ship is safe in harbor, but that’s not what ships are for.”– William G.T. Shedd',
+		'“If opportunity doesn’t knock, build a door.” – Milton Berle',
+		'“Education is not the filling of a pail, but the lighting of a fire.” – W.B. Yeats',
+		'“Failure is simply the opportunity to begin again, this time more intelligently.” – Henry Ford',
+		'“Great minds discuss ideas, average minds discuss events, small minds discuss people.” – Eleanor Roosevelt',
+		'“Everything should be made as simple as possible, but no simpler.” – Albert Einstein',
+		'“Turn your wounds into wisdom.” – Oprah Winfrey',
+		'“Victory is sweetest when you have known defeat.” – Malcolm S. Forbes',
+		'“Life isn’t about finding yourself. Life is about creating yourself.” – George Bernard Shaw'
+	];
 	let examCounter = 0;
 	const handlecustomModalClose = () => {
 		setcustomModal(false);
@@ -106,7 +118,6 @@ function Dashboard(props) {
 		<div className="col">
 			<CustomSideNav className="custom-sidenav" username={userInfo.regd_no} userObj={userInfo} />
 			<NavBar emoji={true} title={`WELCOME ${userInfo.name}`} username={userInfo.regd_no} />
-
 			<div className="dashboard-tabs">
 				<Tabs defaultActiveKey="ongoingExams" id="uncontrolled-tab-example">
 					<Tab eventKey="ongoingExams" title="Ongoing Exams">
@@ -114,7 +125,8 @@ function Dashboard(props) {
 						<div className="row align-items-center justify-content-center">
 							{allExams.map((exam, index) => {
 								return (
-									exam.isActive && (
+									exam.isActive &&
+									exam.dept === userInfo.branch && (
 										<div
 											key={index}
 											className="col-xl-10 col-lg-10 col-md-6 col-sm-10 col-10 mt-4 mb-4 exam-cards-col"
@@ -140,8 +152,8 @@ function Dashboard(props) {
 									<div className="col-md-1">
 										<img
 											className="img-responsive"
-											width="700"
-											height="500"
+											width="600"
+											height="400"
 											src={require('../assets/clip-log-out.png')}
 											alt="No Ongoing Exams"
 										/>
@@ -196,8 +208,8 @@ function Dashboard(props) {
 							<div className="text-center">
 								<img
 									className="img-responsive"
-									width="700"
-									height="500"
+									width="600"
+									height="400"
 									src={require('../assets/clip-log-out.png')}
 									alt=""
 								/>
@@ -209,6 +221,9 @@ function Dashboard(props) {
 						)}
 					</Tab>
 				</Tabs>
+			</div>
+			<div className="quote-text">
+				<p>{quotes[Math.floor(Math.random() * quotes.length)]}</p>
 			</div>
 		</div>
 	);

@@ -40,21 +40,23 @@
 }
 
 .dashboard-tabs {
-    margin-left: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 150px;
+    margin-right: 100px;
 }
 
 .start-test-btn-div {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    width: 50%;
 }
 
 .start-test-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
     height: 50px;
     border: 2px solid 2876F9;
     background-color: white;
@@ -62,4 +64,21 @@
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;
+}
+
+.quote-text {
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+    color: #8635f1;
+    text-shadow: 2px 1px #e2d3f7;
+}
+
+.quote-text p {
+    border: solid 1px #121212;
+    padding: 12px;
+    border-radius: 8px;
 }

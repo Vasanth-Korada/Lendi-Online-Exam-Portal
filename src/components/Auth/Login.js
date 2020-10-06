@@ -13,6 +13,7 @@ class Login extends Component {
 			username: '', //TypedId
 			password: '', //Typed Password
 			branch: 'CSE',
+			batch: '2021',
 			userObj: {}
 		};
 		this.usernameChange = this.usernameChange.bind(this);
@@ -30,8 +31,9 @@ class Login extends Component {
 			loading: true
 		});
 		e.preventDefault();
-		const ref = await firebase.firestore().collection(this.state.branch).doc(this.state.username.toUpperCase());
-		await ref
+		const ref = await firebase.firestore().collection(this.state.branch).doc(this.state.batch);
+		var dataRef = ref.collection('data').doc(this.state.username.toUpperCase());
+		await dataRef
 			.get()
 			.then((doc) => {
 				const data = doc.data();
@@ -43,6 +45,7 @@ class Login extends Component {
 			});
 		if (this.state.password === this.state.dbpassword) {
 			console.log('LOGIN SUCCESS');
+			this.state.userObj['batch'] = this.state.batch;
 			this.setState({ toDashboard: true });
 		} else {
 			console.log('LOGIN FAILED');
@@ -83,7 +86,7 @@ class Login extends Component {
 			<form onSubmit={this.loginSubmit}>
 				<div className="form-group">
 					<div className="row branch-dropdown">
-						<div>Choose Branch:</div>
+						<div>Choose Branch & Passout year:</div>
 						<div className="dropdown">
 							<select
 								className="btn btn-primary btn-sm dropdown-toggle"
@@ -100,10 +103,25 @@ class Login extends Component {
 								<option value="MECH">MECH</option>
 							</select>
 						</div>
+						<div className="dropdown">
+							<select
+								className="btn btn-primary btn-sm dropdown-toggle"
+								value={this.state.batch}
+								onChange={(e) =>
+									this.setState({
+										batch: e.target.value
+									})}
+								required
+							>
+								<option value="2021">2021</option>
+								<option value="2022">2022</option>
+								<option value="2023">2023</option>
+							</select>
+						</div>
 					</div>
 				</div>
 				<div className="form-group">
-					<label htmlFor="exampleInputEmail1">Roll Number:</label>
+					<label htmlFor="exampleInputEmail1">Enter Roll Number:</label>
 					<input
 						type="text"
 						className="form-control regd-field"

@@ -20,6 +20,7 @@ const ExamDashboard = () => {
 			total_questions: undefined,
 			exam_pin: '',
 			dept: '',
+			batch: '',
 			Path: ''
 		},
 		onSubmit: async (values) => {
@@ -34,9 +35,12 @@ const ExamDashboard = () => {
 				exam_id: values.exam_id,
 				exam_name: values.exam_name,
 				exam_marks: values.total_marks,
+				exam_date: values.exam_date,
+				exam_time: values.exam_time,
 				exam_total_questions: values.total_questions,
 				exam_pin: values.exam_pin,
-				dept: values.dept
+				dept: values.dept,
+				batch: values.batch
 			});
 			console.log(values);
 			setToQuestion(true);
@@ -165,6 +169,22 @@ const ExamDashboard = () => {
 								</select>
 							</Form.Group>
 							<Form.Group>
+								<Form.Label>Choose Batch:</Form.Label>
+								<br />
+								<select
+									id="batch"
+									name="batch"
+									value={formik.values.batch}
+									onChange={formik.handleChange}
+									className="btn btn-primary dropdown-toggle "
+									required
+								>
+									<option value={'2021'}>2021</option>
+									<option value={'2022'}>2022</option>
+									<option value={'2023'}>2023</option>
+								</select>
+							</Form.Group>
+							<Form.Group>
 								<Form.Label>Create Exam PIN: </Form.Label>
 								<Form.Control
 									type="text"
@@ -178,6 +198,7 @@ const ExamDashboard = () => {
 									required
 								/>
 							</Form.Group>
+							<hr />
 							<Col sm={10}>
 								<Form.Check
 									type="radio"

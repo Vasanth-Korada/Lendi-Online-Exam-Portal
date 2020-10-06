@@ -56,3 +56,10 @@
     display: block;
     justify-content: center;
 }
+
+.std-data-upload-form {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+}

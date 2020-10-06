@@ -5,7 +5,7 @@
 .branch-dropdown {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     margin-left: 2px;
 }
 

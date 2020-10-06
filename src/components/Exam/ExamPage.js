@@ -97,7 +97,9 @@ function ExamPage(props) {
 				const correctEntry = entry1;
 				if (userEntry[0] === correctEntry[0]) {
 					if (userEntry[1] === correctEntry[1]) {
-						score.current++;
+						if (score.current < currentExam.exam_marks) {
+							score.current++;
+						}
 					}
 				}
 			});
@@ -117,6 +119,15 @@ function ExamPage(props) {
 					submit_time: firebase.firestore.FieldValue.serverTimestamp()
 				})
 				.then(() => {
+					var batchRef = firebase.firestore().collection(userObj.branch).doc(userObj.batch);
+					var stdRef = batchRef.collection('data').doc(userObj.regd_no);
+					var activityRef = stdRef.collection('activity').doc(currentExam.exam_id);
+					activityRef.set({
+						exam_name: currentExam.exam_name,
+						marks_gained: score.current,
+						submit_time: firebase.firestore.FieldValue.serverTimestamp(),
+						isSubmitted: true
+					});
 					setloading(false);
 					setToResult(true);
 					console.log('Score:', score.current);

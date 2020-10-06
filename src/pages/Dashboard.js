@@ -9,6 +9,7 @@ import { Card } from 'react-bootstrap';
 import ExamCard from '../helpers/ExamCard.js';
 import { Tabs, Tab } from 'react-bootstrap';
 import Loader from '../utils/Loader';
+import MyPreviousActivity from '../components/User/MyPreviousActivity';
 
 function Dashboard(props) {
 	const [ userInfo, setuserInfo ] = useState({});
@@ -36,6 +37,7 @@ function Dashboard(props) {
 
 	useEffect(
 		() => {
+			console.log(props.location.state.userObj);
 			setuserInfo(props.location.state.userObj);
 			getAllExams().then((allExams) => {
 				setallExams(allExams);
@@ -83,7 +85,7 @@ function Dashboard(props) {
 						.doc(userInfo.regd_no);
 					await ref
 						.set({
-							isAttempted: true, 
+							isAttempted: true,
 							isSubmitted: false,
 							name: userInfo.name,
 							regd_no: userInfo.regd_no,
@@ -126,7 +128,8 @@ function Dashboard(props) {
 							{allExams.map((exam, index) => {
 								return (
 									exam.isActive &&
-									exam.dept === userInfo.branch && (
+									exam.dept === userInfo.branch &&
+									exam.batch === userInfo.batch && (
 										<div
 											key={index}
 											className="col-xl-10 col-lg-10 col-md-6 col-sm-10 col-10 mt-4 mb-4 exam-cards-col"
@@ -219,6 +222,10 @@ function Dashboard(props) {
 								</div>
 							</div>
 						)}
+					</Tab>
+
+					<Tab eventKey="myPreviousActivity" title="My Previous Activity">
+						<MyPreviousActivity userObj={userInfo} />
 					</Tab>
 				</Tabs>
 			</div>

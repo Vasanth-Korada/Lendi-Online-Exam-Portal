@@ -5,7 +5,9 @@ import { Form, Button, Table, Col, Row } from 'react-bootstrap';
 import '../AdminDashboard.css';
 import { HashLoader } from 'react-spinners';
 import { AdminLoginBranchContext } from '../AdminLoginBranchContext';
-var Results = [];
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+var results = [];
 const ResultDashboard = () => {
 	const [ examName, setexamName ] = useState('');
 	const [ loading, setloading ] = useState(false);
@@ -16,7 +18,7 @@ const ResultDashboard = () => {
 		},
 		onSubmit: async (values) => {
 			setloading(true);
-			Results = [];
+			results = [];
 			var ref = await firebase.firestore().collection('tests').doc(values.exam_id);
 			await ref.get().then((doc) => {
 				const data = doc.data();
@@ -31,7 +33,7 @@ const ResultDashboard = () => {
 					.then(async (snap) => {
 						snap.docs.forEach(async (doc) => {
 							const data = doc.data();
-							Results.push({
+							results.push({
 								id: doc.id,
 								name: data.name,
 								attempted: data.isAttempted,
@@ -58,7 +60,7 @@ const ResultDashboard = () => {
 						snap.docs.forEach(async (doc) => {
 							const data = doc.data();
 							console.log(data);
-							Results.push({
+							results.push({
 								id: doc.id,
 								name: doc.name,
 								attempted: data.isAttempted,
@@ -75,9 +77,44 @@ const ResultDashboard = () => {
 						window.alert('Invalid Test ID!');
 					});
 			}
-			console.log(Results);
+			console.log(results);
 		}
 	});
+	const exportPDF = () => {
+		const unit = 'pt';
+		const size = 'A4'; // Use A1, A2, A3 or A4
+		const orientation = 'portrait'; // portrait or landscape
+
+		const marginLeft = 20;
+		const doc = new jsPDF(orientation, unit, size);
+
+		doc.setFontSize(15);
+
+		const title = examName + ' Exam Report';
+		const headers = [ [ 'SNO', 'REGD NO', 'NAME', 'BRANCH', 'SCORE', 'ATTEMPTED', 'SUBMITTED', 'SUBMIT TIME','REMARKS' ] ];
+
+		const data = results.map((result, index) => [
+			index + 1,
+			result.id,
+			result.name,
+			result.branch,
+			result.marks,
+			result.attempted,
+			result.submitted,
+			result.submit_time.toDate().toString().slice(0, 25),
+			result.remarks
+		]);
+
+		let content = {
+			startY: 50,
+			head: headers,
+			body: data
+		};
+
+		doc.text(title, marginLeft, 40);
+		doc.autoTable(content);
+		doc.save(`${examName} Exam Report.pdf`);
+	};
 	return (
 		<AdminLoginBranchContext.Consumer>
 			{(branch) => (
@@ -143,7 +180,8 @@ const ResultDashboard = () => {
 												</option>
 											</select>
 										</Form.Group>
-										<Row>
+										<Row style={{ display: 'flex', flexDirection: 'row' }}>
+											<div />
 											<Form.Group>
 												<Button
 													size="lg"
@@ -167,7 +205,7 @@ const ResultDashboard = () => {
 					) : (
 						<div />
 					)}
-					{Results.length ? (
+					{results.length ? (
 						<div>
 							<div className="result-dashboard-exam-name">
 								<p>Exam Name: {examName}</p>
@@ -186,7 +224,7 @@ const ResultDashboard = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{Results.map((obj, index) => (
+									{results.map((obj, index) => (
 										<tr key={index}>
 											<td>{index + 1}</td>
 											<td>{obj.id}</td>
@@ -208,6 +246,14 @@ const ResultDashboard = () => {
 									))}
 								</tbody>
 							</Table>
+							<Button
+								size="lg"
+								className="btn btn-success text-center"
+								variant="success"
+								onClick={() => exportPDF()}
+							>
+								Download Report
+							</Button>
 						</div>
 					) : null}
 				</div>

@@ -53,12 +53,14 @@ const Result = (props) => {
 				</Table>
 			</div>
 			<div className="text-center col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<img style={{width:"30%"}} src={require('../../assets/done-5.png')} alt="result-img" />
+				<img style={{ width: '30%' }} src={require('../../assets/done-5.png')} alt="result-img" />
 			</div>
 			<div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-primary text-center credits-box">
 				Developed with ❤ by Vasanth Korada
 			</div>
-			<Link className="home-link" to="/">Go to Home</Link>
+			<Link className="home-link" to="/">
+				Go to Home
+			</Link>
 		</div>
 	);
 };

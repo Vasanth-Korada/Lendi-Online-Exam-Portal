@@ -18,6 +18,7 @@ const ExamDashboard = () => {
 			exam_time: '',
 			total_marks: undefined,
 			total_questions: undefined,
+			faculty_name: '',
 			exam_pin: '',
 			dept: '',
 			batch: '',
@@ -40,7 +41,8 @@ const ExamDashboard = () => {
 				exam_total_questions: values.total_questions,
 				exam_pin: values.exam_pin,
 				dept: values.dept,
-				batch: values.batch
+				batch: values.batch,
+				faculty_name: values.faculty_name
 			});
 			console.log(values);
 			setToQuestion(true);
@@ -146,6 +148,18 @@ const ExamDashboard = () => {
 									id="total_questions"
 									placeholder="Enter Total Questions"
 									value={formik.values.total_questions}
+									onChange={formik.handleChange}
+									required
+								/>
+							</Form.Group>
+							<Form.Group>
+								<Form.Label>Faculty Name: </Form.Label>
+								<Form.Control
+									type="text"
+									name="faculty_name"
+									id="faculty_name"
+									placeholder="Enter Faculty Name"
+									value={formik.values.faculty_name}
 									onChange={formik.handleChange}
 									required
 								/>

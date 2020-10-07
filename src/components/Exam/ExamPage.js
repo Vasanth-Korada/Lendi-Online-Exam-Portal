@@ -21,34 +21,29 @@ function ExamPage(props) {
 	const [ examDurationMins, setexamDurationMins ] = useState(0);
 	const [ examover, setexamover ] = useState(false);
 	const [ userObj, setuserObj ] = useState({});
+	var remarks = '';
 	window.onload = function() {
 		document.onkeydown = function(e) {
 			return (e.which || e.keyCode) !== 116;
 		};
 	};
 
+	window.addEventListener('visibilitychange', (event) => {
+		if (document.visibilityState === 'visible') {
+			console.log('tab is activate');
+		} else {
+			remarks = 'Switched to another tab';
+			console.log(remarks);
+
+			window.alert(
+				'WARNING!! Do not switch to another tab while using this portal. Doing so you will be recorded with suspicious activity'
+			);
+		}
+	});
+
 	useEffect(
 		() => {
-			// if (window.performance) {
-			// 	if (performance.navigation.type === 1) {
-			// 		console.log('Reloaded');
-			// 		var counter = parseInt(sessionStorage.getItem('refreshCounter'));
-			// 		if (isNaN(counter)) {
-			// 			counter = 0;
-			// 		}
-			// 		if (counter >= 2) {
-			// 			sessionStorage.clear();
-			// 			return;
-			// 			// setToHome(true);
-			// 		} else {
-			// 			sessionStorage.setItem('refreshCounter', ++counter);
-			// 		}
-			// 	} else {
-			// 		// alert('This page is not reloaded');
-			// 	}
-			// }
-
-			document.addEventListener('contextmenu', (event) => event.preventDefault());
+			window.addEventListener('contextmenu', (event) => event.preventDefault());
 			var elem = document.documentElement;
 			if (elem.mozRequestFullScreen) {
 				/* Firefox */
@@ -75,6 +70,9 @@ function ExamPage(props) {
 			}
 			fetchqBank();
 			return () => {
+				window.removeEventListener('visibilitychange', function() {
+					console.log('Removed Visibility Change');
+				});
 				setQuestions([]);
 			};
 		},
@@ -116,7 +114,8 @@ function ExamPage(props) {
 				.update({
 					isSubmitted: true,
 					marks_gained: score.current,
-					submit_time: firebase.firestore.FieldValue.serverTimestamp()
+					submit_time: firebase.firestore.FieldValue.serverTimestamp(),
+					remarks: remarks !== '' ? remarks : 'No Remarks'
 				})
 				.then(() => {
 					var batchRef = firebase.firestore().collection(userObj.branch).doc(userObj.batch);
@@ -126,7 +125,8 @@ function ExamPage(props) {
 						exam_name: currentExam.exam_name,
 						marks_gained: score.current,
 						submit_time: firebase.firestore.FieldValue.serverTimestamp(),
-						isSubmitted: true
+						isSubmitted: true,
+						remarks: remarks !== '' ? remarks : 'No Remarks'
 					});
 					setloading(false);
 					setToResult(true);
@@ -141,6 +141,9 @@ function ExamPage(props) {
 
 	if (toResult) {
 		sessionStorage.clear();
+		document.removeEventListener('visibilitychange', () => {
+			console.log('visibility change removed');
+		});
 		return (
 			<Redirect
 				to={{
@@ -158,7 +161,7 @@ function ExamPage(props) {
 		);
 	}
 	return examover === false ? (
-		<div>
+		<div id="exam-page">
 			<div className="custom">
 				<div />
 				<div className="exam-timer-box">

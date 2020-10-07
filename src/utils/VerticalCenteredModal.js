@@ -12,6 +12,7 @@ function MyVerticallyCenteredModal(props) {
 					<p>NAME: <span className="tab"><b>{props.userObj.name}</b></span> </p>
 					<p>REGD NO:<span className="tab">{props.userObj.regd_no}</span></p>
 					<p>BRANCH:<span className="tab">{props.userObj.branch}</span></p>
+					<p>GRADUATION YEAR:<span className="tab">{props.userObj.batch}</span></p>
 					<p>EMAIL:<span className="tab">{props.userObj.email}</span></p>
 					<p>MOBILE:<span className="tab">{props.userObj.phno}</span></p>
 				</div>

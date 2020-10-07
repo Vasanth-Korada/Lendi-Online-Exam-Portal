@@ -69,6 +69,7 @@ function Dashboard(props) {
 	);
 
 	const handleStartTest = async (exam, username) => {
+		
 		isAttempted(exam.exam_id, username).then(async (data) => {
 			console.log(data);
 			if (data === false) {
@@ -85,7 +86,7 @@ function Dashboard(props) {
 						.doc(userInfo.regd_no);
 					await ref
 						.set({
-							isAttempted: true,
+							isAttempted: true, //CHANGE TO TRUE
 							isSubmitted: false,
 							name: userInfo.name,
 							regd_no: userInfo.regd_no,

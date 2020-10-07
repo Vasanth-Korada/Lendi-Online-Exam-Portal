@@ -63,10 +63,10 @@ const AdminLogin = () => {
 												required
 											>
 												<option value="superAdmin">SUPER ADMIN</option>
-												<option value="cse">CSE</option>
-												<option value="ece">ECE</option>
-												<option value="eee">EEE</option>
-												<option value="mech">MECH</option>
+												<option value="cse">CSE ADMIN</option>
+												<option value="ece">ECE ADMIN</option>
+												<option value="eee">EEE ADMIN</option>
+												<option value="mech">MECH ADMIN</option>
 											</select>
 										</div>
 									</div>

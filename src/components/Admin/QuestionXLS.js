@@ -6,10 +6,12 @@ import NavBar from '../NavBar';
 import { Table, Button } from 'react-bootstrap';
 import './QuestionXLS.css';
 import HashLoader from 'react-spinners/HashLoader';
+import { Redirect } from 'react-router-dom';
 
 const QuestionXLS = (props) => {
 	const [ loading, setLoading ] = useState(false);
 	const [ flag, setFlag ] = useState(false);
+	const [ toAdminDashboard, setToAdminDashboard ] = useState(false);
 	const questions_xls = useRef([]);
 	console.log(questions_xls.current);
 
@@ -19,7 +21,6 @@ const QuestionXLS = (props) => {
 		var file = files[0];
 		const reader = new FileReader();
 		reader.onload = () => {
-			
 			csv.parse(reader.result, (err, data) => {
 				for (var i = 1; i < data.length; i++) {
 					const question = data[i][0];
@@ -57,6 +58,7 @@ const QuestionXLS = (props) => {
 			.then(() => {
 				setLoading(false);
 				alert('Questions Uploaded Successfully!');
+				setToAdminDashboard(true);
 				setFlag(false);
 			});
 	};
@@ -66,6 +68,10 @@ const QuestionXLS = (props) => {
 				<HashLoader size={50} color="#0A79DF" />
 			</div>
 		);
+	}
+
+	if (toAdminDashboard) {
+		return <Redirect to="/adminLogin" />;
 	}
 
 	return (

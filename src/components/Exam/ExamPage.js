@@ -21,28 +21,27 @@ function ExamPage(props) {
 	const [ examDurationMins, setexamDurationMins ] = useState(0);
 	const [ examover, setexamover ] = useState(false);
 	const [ userObj, setuserObj ] = useState({});
-	var remarks = '';
+	const remarks = useRef('No Remarks');
 	window.onload = function() {
 		document.onkeydown = function(e) {
 			return (e.which || e.keyCode) !== 116;
 		};
 	};
 
-	window.addEventListener('visibilitychange', (event) => {
-		if (document.visibilityState === 'visible') {
-			console.log('tab is activate');
-		} else {
-			remarks = 'Switched to another tab';
-			console.log(remarks);
-
-			window.alert(
-				'WARNING!! Do not switch to another tab while using this portal. Doing so you will be recorded with suspicious activity'
-			);
-		}
-	});
-
 	useEffect(
 		() => {
+			window.addEventListener('visibilitychange', (event) => {
+				if (document.visibilityState === 'visible') {
+					console.log('tab is activate');
+				} else {
+					remarks.current = 'Switched to another tab';
+					console.log(remarks.current);
+
+					window.alert(
+						'WARNING!! Do not switch to another tab while using this portal. Doing so you will be recorded with suspicious activity'
+					);
+				}
+			});
 			window.addEventListener('contextmenu', (event) => event.preventDefault());
 			var elem = document.documentElement;
 			if (elem.mozRequestFullScreen) {
@@ -94,7 +93,7 @@ function ExamPage(props) {
 			Object.entries(correctAnswers.current).forEach((entry1) => {
 				const correctEntry = entry1;
 				if (userEntry[0] === correctEntry[0]) {
-					if (userEntry[1] === correctEntry[1]) {
+					if (userEntry[1].trim() === correctEntry[1].trim()) {
 						if (score.current < currentExam.exam_marks) {
 							score.current++;
 						}
@@ -115,7 +114,7 @@ function ExamPage(props) {
 					isSubmitted: true,
 					marks_gained: score.current,
 					submit_time: firebase.firestore.FieldValue.serverTimestamp(),
-					remarks: remarks !== '' ? remarks : 'No Remarks'
+					remarks: remarks.current
 				})
 				.then(() => {
 					var batchRef = firebase.firestore().collection(userObj.branch).doc(userObj.batch);

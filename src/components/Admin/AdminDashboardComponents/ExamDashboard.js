@@ -20,8 +20,8 @@ const ExamDashboard = () => {
 			total_questions: undefined,
 			faculty_name: '',
 			exam_pin: '',
-			dept: '',
-			batch: '',
+			dept: 'CSE',
+			batch: '2021',
 			Path: ''
 		},
 		onSubmit: async (values) => {

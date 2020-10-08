@@ -40,7 +40,8 @@ const ResultDashboard = () => {
 								submitted: data.isSubmitted,
 								marks: data.marks_gained,
 								submit_time: data.submit_time,
-								branch: data.branch
+								branch: data.branch,
+								remarks: data.remarks,
 							});
 						});
 						setloading(false);
@@ -221,6 +222,7 @@ const ResultDashboard = () => {
 										<th>Attempted</th>
 										<th>Submitted</th>
 										<th>Submitted Time</th>
+										<th>Remarks</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -242,6 +244,7 @@ const ResultDashboard = () => {
 											) : (
 												<td>{obj.submit_time.toDate().toString().slice(0, 25)}</td>
 											)}
+											<td>{obj.remarks}</td>
 										</tr>
 									))}
 								</tbody>

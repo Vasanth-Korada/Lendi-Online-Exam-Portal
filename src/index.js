@@ -11,6 +11,7 @@ import AdminLogin from './components/Admin/AdminLogin';
 import Questions from './components/Admin/Question';
 import QuestionXLS from './components/Admin/QuestionXLS';
 import AdminDashboard from './components/Admin/AdminDashboard';
+import 'react-toastify/dist/ReactToastify.css';
 ReactDOM.render(
 	<Router>
 		<Switch>

@@ -3,6 +3,7 @@ import firebase from '../../firebase';
 import { Redirect } from 'react-router-dom';
 import './Login.css';
 import HashLoader from 'react-spinners/HashLoader';
+import { ToastContainer, toast } from 'react-toastify';
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -49,7 +50,16 @@ class Login extends Component {
 			this.setState({ toDashboard: true });
 		} else {
 			console.log('LOGIN FAILED');
-			alert('Invalid Username or Password');
+			// alert('Invalid Username or Password');
+			toast.error('Invalid Username or Password', {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: true,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				});
 			this.setState({
 				loading: false
 			});
@@ -84,6 +94,7 @@ class Login extends Component {
 		}
 		return (
 			<form onSubmit={this.loginSubmit}>
+				<ToastContainer />
 				<div className="form-group">
 					<div className="row branch-dropdown">
 						<div>Choose Branch & Passout year:</div>

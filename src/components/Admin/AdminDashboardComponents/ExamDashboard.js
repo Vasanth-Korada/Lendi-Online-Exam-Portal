@@ -44,12 +44,10 @@ const ExamDashboard = () => {
 				batch: values.batch,
 				faculty_name: values.faculty_name
 			});
-			console.log(values);
 			setToQuestion(true);
 		}
 	});
 	if (toQuestion) {
-		console.log(examInfo);
 		return (
 			<Redirect
 				to={{

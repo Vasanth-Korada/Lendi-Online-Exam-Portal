@@ -60,7 +60,6 @@ function ExamPage(props) {
 			setcurrentExam(props.location.state.currentExam);
 			setuserObj(props.location.state.userObj);
 			async function fetchqBank() {
-				console.log('Current Exam', currentExam);
 				if (Object.keys(currentExam).length > 0) {
 					await qBank(currentExam.exam_total_questions, currentExam.exam_id).then((data) => {
 						data.map((item) => setQuestions((questions) => [ ...questions, data ]));
@@ -79,9 +78,9 @@ function ExamPage(props) {
 	);
 	const computeAnswer = (choosenAnswer, correctAnswer, question) => {
 		userAnswers.current[question] = choosenAnswer;
-		console.log('User Answers:', userAnswers.current);
+		// console.log('User Answers:', userAnswers.current);
 		// console.log('Correct Answers:', correctAnswers);
-		console.log('User Chosen Answer', choosenAnswer);
+		// console.log('User Chosen Answer', choosenAnswer);
 		setResponses(responses < currentExam.exam_total_questions ? responses + 1 : currentExam.exam_total_questions);
 	};
 	const handleSubmit = async () => {

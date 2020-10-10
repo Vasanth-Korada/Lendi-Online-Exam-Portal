@@ -20,7 +20,6 @@ function ExamStatus() {
 			.get()
 			.then((doc) => {
 				const examdata = doc.data();
-				console.log(examdata.exam_id + 'status:' + examdata.isActive);
 				setexamStatus(examdata.isActive);
 				setExam(examdata);
 			})

@@ -13,7 +13,6 @@ const QuestionXLS = (props) => {
 	const [ flag, setFlag ] = useState(false);
 	const [ toAdminDashboard, setToAdminDashboard ] = useState(false);
 	const questions_xls = useRef([]);
-	console.log(questions_xls.current);
 
 	const onDrop = (files) => {
 		questions_xls.current = [];
@@ -41,7 +40,6 @@ const QuestionXLS = (props) => {
 			});
 		};
 		setTimeout(async () => {
-			console.log(questions_xls.current);
 			setLoading(false);
 			setFlag(true);
 		}, 3000);
@@ -106,7 +104,6 @@ const QuestionXLS = (props) => {
 										<td>{obj.allocated_marks}</td>
 									</tr>
 								),
-								console.log(questions_xls.current)
 							)}
 						</tbody>
 					</Table>

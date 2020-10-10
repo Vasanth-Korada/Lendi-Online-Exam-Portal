@@ -2,9 +2,20 @@ import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { RiAdminLine } from 'react-icons/ri';
+import { Redirect } from 'react-router-dom';
 import './Navbar.css';
 class NavBar extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			toAdminLogin: false
+		};
+	}
+
 	render() {
+		if (this.state.toAdminLogin) {
+			return <Redirect to="/adminLogin" />;
+		}
 		return (
 			<Navbar
 				expand="lg"
@@ -12,7 +23,7 @@ class NavBar extends React.Component {
 				className="login-navbar"
 				style={{
 					backgroundColor: '#0A79DF',
-					height: '5.5rem',
+					height: '5.5rem'
 				}}
 			>
 				<Navbar.Brand className="navbar-logo">
@@ -33,6 +44,19 @@ class NavBar extends React.Component {
 					</Link>
 				) : (
 					<div />
+				)}
+				{this.props.adminLogoutBtn === true && (
+					<div>
+						<button
+							type="button"
+							class="btn btn-danger btn-sm"
+							onClick={() => {
+								this.setState({ toAdminLogin: true });
+							}}
+						>
+							LOGOUT
+						</button>
+					</div>
 				)}
 			</Navbar>
 		);

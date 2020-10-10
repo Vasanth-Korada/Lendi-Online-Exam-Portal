@@ -10,6 +10,7 @@ import ExamCard from '../helpers/ExamCard.js';
 import { Tabs, Tab } from 'react-bootstrap';
 import Loader from '../utils/Loader';
 import MyPreviousActivity from '../components/User/MyPreviousActivity';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Dashboard(props) {
 	const [ userInfo, setuserInfo ] = useState({});
@@ -69,14 +70,13 @@ function Dashboard(props) {
 	);
 
 	const handleStartTest = async (exam, username) => {
-		
 		isAttempted(exam.exam_id, username).then(async (data) => {
 			console.log(data);
 			if (data === false) {
 				var pin = prompt('Enter Exam PIN:');
 				if (pin === exam.exam_pin) {
 					setloading(true);
-					console.log(exam);
+					// console.log(exam);
 					console.log(userInfo.regd_no);
 					var ref = await firebase
 						.firestore()
@@ -97,16 +97,31 @@ function Dashboard(props) {
 							setloading(false);
 						});
 				} else {
-					window.alert('Invalid Exam PIN, Please try again!');
+					toast.error('Invalid Exam PIN', {
+						position: 'top-center',
+						autoClose: 3000,
+						hideProgressBar: true,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined
+					});
 				}
 			} else {
-				window.alert('Hey, You have already taken this exam');
+				toast.info('Hey, You already took this exam', {
+					position: 'top-center',
+					autoClose: 3000,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
 			}
 		});
 	};
 
 	const redirectToExamPage = (currentExam) => {
-		console.log('Function Called');
 		return props.history.push({
 			pathname: '/examPage',
 			state: {
@@ -119,6 +134,7 @@ function Dashboard(props) {
 
 	return (
 		<div className="col">
+			<ToastContainer />
 			<CustomSideNav className="custom-sidenav" username={userInfo.regd_no} userObj={userInfo} />
 			<NavBar emoji={true} title={`WELCOME ${userInfo.name}`} username={userInfo.regd_no} />
 			<div className="dashboard-tabs">

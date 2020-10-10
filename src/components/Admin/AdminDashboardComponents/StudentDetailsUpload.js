@@ -11,9 +11,6 @@ const StudentDetailsUpload = () => {
 	const onDrop = (files) => {
 		var file = files[0];
 		const reader = new FileReader();
-		console.log('hello');
-		console.log(branch);
-		console.log(batch);
 		reader.onload = async () => {
 			var dRef = await firebase.firestore().collection(branch).doc(batch);
 			csv.parse(reader.result, async (err, data) => {

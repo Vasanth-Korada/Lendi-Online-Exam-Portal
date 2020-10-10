@@ -46,7 +46,6 @@ const ResultDashboard = () => {
 						setloading(false);
 					})
 					.catch((e) => {
-						console.log(e);
 						window.alert('Invalid Test ID!');
 					});
 			} else {

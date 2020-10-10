@@ -13,7 +13,7 @@ const AdminDashboard = (props) => {
 	return (
 		<AdminLoginBranchContext.Provider value={props.location.state.branch}>
 			<div>
-				<NavBar title="Welcome Admin" />
+				<NavBar title={`Welcome ${props.location.state.branch.toUpperCase()}`} adminLogoutBtn={true} />
 				<br />
 				<Tabs defaultActiveKey="createExam" id="uncontrolled-tab-example">
 					<Tab eventKey="createExam" title="Exam Dashboard">

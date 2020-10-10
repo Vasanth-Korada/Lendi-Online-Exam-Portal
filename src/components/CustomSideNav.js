@@ -8,6 +8,7 @@ import firebase from '../firebase';
 import { Redirect } from 'react-router-dom';
 import VerticalCenteredModal from '../utils/VerticalCenteredModal';
 import HashLoader from 'react-spinners/HashLoader';
+import { ToastContainer, toast } from 'react-toastify';
 
 function CustomSideNav({ ...props }) {
 	const [ showModal, setshowModal ] = useState(false);
@@ -26,7 +27,8 @@ function CustomSideNav({ ...props }) {
 		setpassword(e.target.value);
 	};
 	const handleResetPassword = async (newPassword) => {
-		const ref = await firebase.firestore().collection(props.userObj.branch).doc(props.userObj.regd_no);
+		const bRef = await firebase.firestore().collection(props.userObj.branch).doc(props.userObj.batch);
+		var ref = bRef.collection('data').doc(props.userObj.regd_no);
 		await ref.get().then(async (doc) => {
 			setloading(true);
 			const data = doc.data();
@@ -40,11 +42,27 @@ function CustomSideNav({ ...props }) {
 						setpassword('');
 						setcurrentPassword('');
 						setloading(false);
-						alert('Password updated successfully');
+						toast.success('Password updated successfully', {
+							position: 'top-center',
+							autoClose: 3000,
+							hideProgressBar: true,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined
+						});
 					});
 			} else {
 				setloading(false);
-				alert('Your Current Password is Incorrect! Please try again');
+				toast.error('Your Current Password is Incorrect, Please try again!', {
+					position: 'top-center',
+					autoClose: 3000,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
 			}
 		});
 	};
@@ -53,6 +71,7 @@ function CustomSideNav({ ...props }) {
 	}
 	return (
 		<div>
+			<ToastContainer />
 			<Modal show={showModal} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>Reset Password</Modal.Title>

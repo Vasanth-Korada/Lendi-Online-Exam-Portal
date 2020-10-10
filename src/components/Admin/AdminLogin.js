@@ -4,23 +4,25 @@ import { Form, Button, Card } from 'react-bootstrap';
 import './AdminLogin.css';
 import firebase from '../../firebase';
 import NavBar from '../NavBar';
+import HashLoader from '../../utils/Loader';
 const AdminLogin = () => {
 	const [ username, setUsername ] = useState();
 	const [ password, setPassword ] = useState();
 	const [ toAdminLogin, setToAdminLogin ] = useState(false);
 	const [ loginBranch, setloginBranch ] = useState('superAdmin');
+	const [ loading, setLoading ] = useState(false);
 	const loginSubmit = async (e) => {
+		setLoading(true);
 		e.preventDefault();
-		console.log(username, password);
 		var ref = await firebase.firestore().collection('adminLogin').doc('loginData');
 		ref.get().then((doc) => {
 			const data = doc.data();
-			console.log(loginBranch);
-			console.log(username);
 			const db_pwd = data[loginBranch][username];
 			if (db_pwd === undefined || db_pwd === null) {
+				setLoading(false);
 				window.alert('Invalid Username or password');
 			} else if (db_pwd === password) {
+				setLoading(false);
 				setToAdminLogin(true);
 			}
 		});
@@ -41,12 +43,18 @@ const AdminLogin = () => {
 	return (
 		<div>
 			<NavBar title="Admin Login" />
+			{loading && (
+				<div className="justify-content-center">
+					<HashLoader size={50} color="#0A79DF" />
+				</div>
+			)}
 			<div className="flex-admin-login">
 				<div>
 					<img className="login-image" src={require('../../assets/clip-sign-in.png')} alt="" />
 				</div>
 				<Card className="login-card">
 					<Card.Header as="h5">LOGIN HERE</Card.Header>
+
 					<Card.Header>
 						<div>
 							<Form className="form" onSubmit={loginSubmit}>

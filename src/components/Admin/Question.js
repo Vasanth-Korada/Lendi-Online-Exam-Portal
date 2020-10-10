@@ -22,8 +22,6 @@ const Questions = (props) => {
 		},
 
 		onSubmit: async (values) => {
-			console.log(examInfo.total_marks);
-			console.log(values);
 			setQno(qno + 1);
 			var ref = await firebase.firestore().collection('tests').doc(examInfo.exam_id).update({
 				questions: firebase.firestore.FieldValue.arrayUnion(values)
@@ -38,7 +36,6 @@ const Questions = (props) => {
 		}
 	});
 
-	console.log(examInfo.total_questions);
 	return (
 		<div>
 			<NavBar title="Admin Area" />

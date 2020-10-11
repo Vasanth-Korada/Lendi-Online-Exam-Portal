@@ -8,6 +8,7 @@ import { AdminLoginBranchContext } from '../AdminLoginBranchContext';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 var results = [];
+
 const ResultDashboard = () => {
 	const [ examName, setexamName ] = useState('');
 	const [ loading, setloading ] = useState(false);
